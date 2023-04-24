@@ -11,28 +11,41 @@
   </head>
   <body>
     <div class="board">
-      <form id="todo-form">
-        <input
-          name="name"
-          type="text"
-          placeholder="New TODO name..."
-          id="todo-name-input"
-        />
+      <div class="pomodoro-timer">
+        <div class="timer">
+          <span id="minutes">25</span>:<span id="seconds">00</span>
+        </div>
+        <div class="buttons">
+          <button id="start">Start</button> <button id="stop">Stop</button>
+          <button id="reset">Reset</button>
+        </div>
+      </div>
+      <div class="todo-form-container">
+        <form id="todo-form">
+          <h2>Create a new task</h2>
+          <input
+            name="name"
+            type="text"
+            placeholder="New TODO name..."
+            id="todo-name-input"
+          />
 
-        <textarea
-          name="description"
-          id="todo-description-input"
-          cols="30"
-          rows="10"
-          placeholder="New TODO description..."
-        ></textarea>
+          <textarea
+            name="description"
+            id="todo-description-input"
+            cols="30"
+            rows="10"
+            placeholder="New TODO description..."
+          ></textarea>
 
-        <button type="submit">Add +</button>
-      </form>
+          <button type="submit">Add +</button>
+        </form>
+      </div>
 
       <div class="lanes">
         <div class="swim-lane" id="todo-lane" draggable="true">
           <h3 class="heading">TODO</h3>
+          <button id="todo-submit" type="submit">Add +</button>
         </div>
 
         <div class="swim-lane" id="doing-lane" draggable="true">

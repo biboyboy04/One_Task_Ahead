@@ -18,9 +18,12 @@ export const dragAndDrop = () => {
 
       const bottomTask = insertAboveTask(zone, e.clientY);
       const curTask = document.querySelector(".is-dragging");
+      const todoButton = document.getElementById("todo-submit");
 
       if (!bottomTask) {
-        zone.appendChild(curTask);
+        if (zone.id == todoButton.parentElement.id)
+          zone.insertBefore(curTask, todoButton);
+        else zone.appendChild(curTask);
       } else {
         zone.insertBefore(curTask, bottomTask);
       }
