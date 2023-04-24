@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag & Drop API</title>
+
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script type="module" src="../scripts/index.js"></script>
+  </head>
+  <body>
+    <div class="board">
+      <form id="todo-form">
+        <input
+          name="name"
+          type="text"
+          placeholder="New TODO name..."
+          id="todo-name-input"
+        />
+
+        <textarea
+          name="description"
+          id="todo-description-input"
+          cols="30"
+          rows="10"
+          placeholder="New TODO description..."
+        ></textarea>
+
+        <button type="submit">Add +</button>
+      </form>
+
+      <div class="lanes">
+        <div class="swim-lane" id="todo-lane" draggable="true">
+          <h3 class="heading">TODO</h3>
+        </div>
+
+        <div class="swim-lane" id="doing-lane" draggable="true">
+          <h3 class="heading">Doing</h3>
+        </div>
+
+        <div class="swim-lane" id="done-lane" draggable="true">
+          <h3 class="heading">Done</h3>
+        </div>
+      </div>
+    </div>
+    <script></script>
+  </body>
+</html>
