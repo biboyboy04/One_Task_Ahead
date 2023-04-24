@@ -1,0 +1,30 @@
+.sidebar {
+  display: flex;
+  padding: 1rem;
+  background-color: #508068;
+  flex-direction: column;
+  width: 20%;
+  height: 100vh;
+}
+
+.links {
+  ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    gap: 1.5rem;
+    justify-content: center;
+    padding-inline-start: 0;
+  }
+  a {
+    color: #111111; /* Change link color to red */
+    text-decoration: none; /* Remove underline */
+  }
+
+  li {
+    background-color: #c5e4ae;
+    border-radius: 20px;
+    text-align: center;
+    padding: 1rem 2rem;
+  }
+}
