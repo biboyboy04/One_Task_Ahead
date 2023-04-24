@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    background: #FEF9E6;
+    background: linear-gradient(90deg, #FEF9E6 0%, #f0e4b8 50%, #FEF9E6);
+    height: 100%;
+    margin: 0px;
+    padding: 0;
+    font-family: 'Verdana', sans-serif;
+  }
+  
+  h1 { 
+    font-family: 'Verdana';
+    text-align: center;
+    color: rgb(91, 74, 74); 
+  }
+  
+  .container {
+    max-width: 400px;
+    margin: 70px auto;
+    padding: 26px;
+    border: 6px solid #836853;
+    border-radius: 18px;
+    box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+    height: 54%;
+    animation: breathing-color 3s ease-in-out infinite;
+  }
+  
+  
+  @keyframes breathing-color {
+    0% {
+      background-color: #f0e4b8;
+    }
+    50% {
+      background-color: #F6E8DB;
+    }
+    100% {
+      background-color: #f0e4b8;
+    }
+  }
+  
+.container input[type="text"],
+.container input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  display: inline-block;
+  border: 4px solid #836853;
+  border-radius: 180px;
+  box-sizing: border-box;
+}
+.container button[type="submit"] {
+  margin: 8px;
+  background-color: #836853;
+  color: #fff;
+  padding: 12px 20px;
+  border: 4px solid #836853;
+  margin-left: 12px;
+  border-radius: 180px;
+  cursor: pointer;
+  float: right;
+}
+.container button[type="submit"]:hover {
+  background-color: #b9af5a;
+}
+.error {
+  color: #af4242;
+  background-color: #fde8ec;
+  padding: 10px;
+  display: none;
+  transform: translateY(-20px);
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-align: center;
+}
