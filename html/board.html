@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Board Name</title>
     <link rel="stylesheet" href="../css/normalize.css" />
-    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/board.css" />
+    <link rel="stylesheet" href="../css/nav_bar.css" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
+
     <script type="module" src="../scripts/index.js"></script>
     <script
       src="https://kit.fontawesome.com/c36cb32178.js"
@@ -14,8 +20,44 @@
     ></script>
   </head>
   <body>
+    <nav>
+      <div class="logo">ONE TASK AHEAD</div>
+      <ul>
+        <li>
+          <a href="./templates.html">Templates</a>
+        </li>
+        <li>
+          <a href="./boards.html">Boards</a>
+        </li>
+        <li>
+          <a href="#">Workspace</a>
+          <ul>
+            <li><a href="#">Workspace 1</a></li>
+            <li><a href="#">Workspace 2</a></li>
+            <li><a href="#">Workspace 3</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">Recent</a>
+          <ul>
+            <li><a href="#">Recent 1</a></li>
+            <li><a href="#">Recent 2</a></li>
+            <li><a href="#">Recent 3</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Create</a></li>
+      </ul>
+    </nav>
     <div class="header">
       <h1 id="project-name">NAME OF PROJECT</h1>
+      <h2>l Public l</h2>
+      <i
+        class="fa-sharp fa-regular fa-calendar fa-2xl"
+        style="color: #ffffff"
+      ></i>
+      <button>CALENDAR POWER-UP</button>
+      <button>FILTERS</button>
     </div>
     <div class="board">
       <div class="pomodoro-timer">
@@ -64,6 +106,16 @@
         </div>
       </div>
     </div>
-    <script></script>
+    <script>
+      function logId(id) {
+        console.log(id); // log the id to the console
+      }
+
+      // retrieve the parameter from the URL
+      var id = window.location.hash.substring(1);
+
+      // call the function with the parameter
+      logId(id);
+    </script>
   </body>
 </html>

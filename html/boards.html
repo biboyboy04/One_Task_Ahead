@@ -4,75 +4,89 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boards</title>
+    <title>Board Name</title>
     <link rel="stylesheet" href="../css/normalize.css" />
-    <link rel="stylesheet" href="../css/boards.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/nav_bar.css" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
+
+    <script type="module" src="../scripts/index.js"></script>
     <script
       src="https://kit.fontawesome.com/c36cb32178.js"
       crossorigin="anonymous"
     ></script>
   </head>
   <body>
+    <nav>
+      <div class="logo">ONE TASK AHEAD</div>
+      <ul>
+        <li>
+          <a href="./templates.html">Templates</a>
+        </li>
+        <li>
+          <a href="./boards.html">Boards</a>
+        </li>
+        <li>
+          <a href="#">Workspace</a>
+          <ul>
+            <li><a href="#">Workspace 1</a></li>
+            <li><a href="#">Workspace 2</a></li>
+            <li><a href="#">Workspace 3</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">Recent</a>
+          <ul>
+            <li><a href="#">Recent 1</a></li>
+            <li><a href="#">Recent 2</a></li>
+            <li><a href="#">Recent 3</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Create</a></li>
+      </ul>
+    </nav>
     <!-- sidebar -->
-    <div class="sidebar">
-      <div class="links">
-        <ul>
-          <li>
-            <a href="./boards.html">Boards</a>
-          </li>
-          <li>
-            <a href="./templates.html">Templates</a>
-          </li>
-          <li>
-            <a href="#">Home</a>
-          </li>
-        </ul>
-      </div>
-      <hr />
-      <div class="workspace">
-        <div class="header">
-          <h2>Workspaces</h2>
-          <i
-            class="fa-solid fa-circle-chevron-down fa-xl"
-            style="color: #ffffff"
-          ></i>
+    <div class="content-container">
+      <div class="sidebar">
+        <div class="links">
+          <ul>
+            <a href="./boards.html"><li>Boards</li></a>
+            <a href="./templates.html"><li>Templates</li></a>
+            <a href="#"><li>Home</li></a>
+          </ul>
+        </div>
+        <hr />
+        <div class="workspace">
+          <div class="header">
+            <h2>Workspaces</h2>
+            <i
+              class="fa-solid fa-circle-chevron-down fa-xl"
+              style="color: #ffffff"
+            ></i>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- content -->
-    <div class="content">
-      <div class="templates-popular">
-        <h2>MOST POPULAR TEMPLATES</h2>
-        <div class="container">
-          <div class="card">Template Sample</div>
-          <div class="card">Template Sample</div>
-          <div class="card">Template Sample</div>
-        </div>
-      <div class="workspaces-user">
-        <h2>YOUR WORKSPACES</h2>
+      <!-- content -->
+      <div class="content">
+        <div class="templates-popular">
+          <h2>MOST POPULAR TEMPLATES</h2>
           <div class="container">
-          <div class="card">Workspace Sample</div>
-          <div class="card">Workspace Sample</div>
-          <div class="card">Workspace Sample</div>
-        </div>
+            <div class="card">Template Sample</div>
+            <div class="card">Template Sample</div>
+            <div class="card">Template Sample</div>
+          </div>
+        <div class="workspaces-user">
+          <h2>YOUR WORKSPACES</h2>
+            <div class="container">
+            <div class="card">Workspace Sample</div>
+            <div class="card">Workspace Sample</div>
+            <div class="card">Workspace Sample</div>
+          </div>
+      </div>
     </div>
-    <!-- <div class="content">
-      <div class="categories">
-        <h2>FEATURED CATEGORIES</h2>
-        <div class="container">
-          <div class="card">Category Sample</div>
-          <div class="card">Category Sample</div>
-          <div class="card">Category Sample</div>
-          <div class="card">Category Sample</div>
-        </div>
-      <div class="templates">
-        <h2>NEW & NOTABLE TEMPLATES</h2>
-          <div class="container">
-          <div class="card">Category Sample</div>
-          <div class="card">Category Sample</div>
-          <div class="card">Category Sample</div>
-          <div class="card">Category Sample</div>
-        </div>
-    </div> -->
   </body>
 </html>
