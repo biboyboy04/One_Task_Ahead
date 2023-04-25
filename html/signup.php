@@ -97,8 +97,36 @@
 
             <button type="submit" id="submit-btn" name="submit">Sign Up</button>
         </form>
+        <p>Already a User?</p>
+        <a href="../html/OTA_Login.php">Login</a>
     </div>
 
 </body>
 
 </html>
+<script src="../scripts/sweetalert.min.js"></script>
+
+<?php
+if (isset($_GET["error"])) {
+    if ($_GET["error"] == "success") {
+?>
+
+        <script>
+            swal({
+                title: "Success!",
+                text: "You Have Successfully Registered",
+                icon: "success",
+                button: "OK",
+            }).then(function(value) {
+                if (value) {
+                    // Perform the action when "OK" is clicked
+                    window.location.href = "../html/OTA_Login.php";
+                }
+            });
+        </script>
+
+<?php
+    }
+}
+
+?>

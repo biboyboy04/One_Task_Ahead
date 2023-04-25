@@ -118,7 +118,7 @@ function createUser($conn, $firstname, $lastname, $email, $username, $password)
     mysqli_stmt_bind_param($statement, "sssss", $firstname, $lastname, $username, $email, $hashedpass);
     mysqli_stmt_execute($statement);
     mysqli_stmt_close($statement);
-    header("location: ../html/OTA_Login.php ");
+    header("location: ../html/signup.php?error=success");
     exit();
 }
 
@@ -197,7 +197,7 @@ function loginUser($conn, $username, $password)
         session_start();
         $_SESSION["user_id"] = $usernameExists["user_id"];
         $_SESSION["username"] = $usernameExists["username"];
-        header("location: ../html/home.html");
+        header("location: ../html/home.php");
         exit();
     }
 }

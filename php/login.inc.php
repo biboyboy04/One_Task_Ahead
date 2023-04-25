@@ -19,8 +19,7 @@ if (isset($_POST['submit'])) {
 
     loginUser($conn, $username, $password);
 } else {
-    if (basename($_SERVER['PHP_SELF']) !== 'OTA_Login.php') {
-        header("Location: ../html/OTA_Login.php");
-        exit();
-    }
+
+    header("Location: ../html/OTA_Login.php");
+    exit();
 }

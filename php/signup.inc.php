@@ -1,3 +1,4 @@
+
 <?php
 
 $firstname = "";
@@ -56,22 +57,14 @@ if (isset($_POST["submit"])) {
     }
 
 
+
     //if all errrors are null proceed to create a new user
     if ($firstname_error === null && $lastname_error === null && $username_error === null && $email_error === null && $password_error === null && $rptpassword_error === null) {
         createUser($conn, $firstname, $lastname, $email, $username, $password);
     }
-
-
-
-    //to check if the user already exists
-    //if (userExists($conn, $email, $username) !== false) {
-    //header("Location: ../Sign-Up.php?error=usernametaken");
-    // exit();
-    //}
-
 } else {
     if (basename($_SERVER['PHP_SELF']) !== 'signup.php') {
         header("Location: ../html/signup.php");
         exit();
     }
-} //fix because directory cannot be accessed.
+}
