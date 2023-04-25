@@ -1,12 +1,26 @@
 export const todoModule = (() => {
   const form = document.getElementById("todo-form");
 
-  const todoLane = document.getElementById("todo-lane");
-
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     addTask();
   });
+
+  function addToTodo(task) {
+    const todoButton = document.getElementById("todo-submit");
+    const todoLane = document.getElementById("todo-lane");
+    todoLane.insertBefore(task, todoButton);
+  }
+
+  function addToDoing(task) {
+    const doingLane = document.getElementById("doing-lane");
+    doingLane.appendChild(task);
+  }
+
+  function addToDone(task) {
+    const doneLane = document.getElementById("done-lane");
+    doneLane.appendChild(task);
+  }
 
   function addTask() {
     let inputName = document.getElementById("todo-name-input");
@@ -19,9 +33,7 @@ export const todoModule = (() => {
 
     const task = createTask(taskNameInput, taskDescriptionInput);
 
-    const todoButton = document.getElementById("todo-submit");
-
-    todoLane.insertBefore(task, todoButton);
+    addToTodo(task);
 
     // reset form value
     inputName.value = "";
@@ -106,29 +118,33 @@ export const todoModule = (() => {
 
   //Changeable
   function editTask(taskContainer, taskName, taskDescription) {
+    const originalTaskName = taskName.innerText;
+    const originalTaskDescription = taskDescription.innerText;
+
+    // Create edit form
     const editForm = document.createElement("form");
     editForm.setAttribute("id", "edit-form");
 
     const editNameInput = document.createElement("input");
     editNameInput.type = "text";
     editNameInput.placeholder = "Task Name";
-    editNameInput.value = taskName.innerText;
+    editNameInput.value = originalTaskName;
 
     const editDescriptionInput = document.createElement("textarea");
     editDescriptionInput.placeholder = "Task Description";
-    editDescriptionInput.value = taskDescription.innerText;
+    editDescriptionInput.value = originalTaskDescription;
 
     const editButtons = document.createElement("div");
     editButtons.classList.add("button-container");
 
-    const editSubmitButton = document.createElement("button");
-    editSubmitButton.innerText = "Save";
+    const editSaveButton = document.createElement("button");
+    editSaveButton.innerText = "Save";
 
     const editCancelButton = document.createElement("button");
     editCancelButton.innerText = "Cancel";
 
     editButtons.appendChild(editCancelButton);
-    editButtons.appendChild(editSubmitButton);
+    editButtons.appendChild(editSaveButton);
 
     editForm.appendChild(editNameInput);
     editForm.appendChild(editDescriptionInput);
@@ -137,28 +153,39 @@ export const todoModule = (() => {
     // Replace task with edit form
     taskContainer.replaceWith(editForm);
 
-    // Submit button event listener
-    editSubmitButton.addEventListener("click", (e) => {
+    // Save button event listener
+    editSaveButton.addEventListener("click", (e) => {
       e.preventDefault();
-      const updatedTaskName = createTaskName(editNameInput.value);
-      const updatedTaskDescription = createTaskDescription(
-        editDescriptionInput.value
+
+      // Changeable to replacing just the name and description
+
+      // Replace edit form with a new created task with the edit values
+      editForm.replaceWith(
+        createTask(editNameInput.value, editDescriptionInput.value)
       );
-
-      taskName.replaceWith(updatedTaskName);
-      taskDescription.replaceWith(updatedTaskDescription);
-
-      taskName = updatedTaskName;
-      taskDescription = updatedTaskDescription;
-
-      // Replace edit form with updated task
-      editForm.replaceWith(taskContainer);
     });
 
     // Cancel button event listener
     editCancelButton.addEventListener("click", () => {
+      taskName.innerText = originalTaskName;
+      taskDescription.innerText = originalTaskDescription;
+
+      // Replace edit form with original task
       editForm.replaceWith(taskContainer);
+
+      // Add event listeners to task buttons
+      const editButton = taskContainer.querySelector(".edit-button");
+      const deleteButton = taskContainer.querySelector(".delete-button");
+
+      editButton.addEventListener("click", () => {
+        editTask(taskContainer, taskName, taskDescription);
+      });
+
+      deleteButton.addEventListener("click", () => {
+        deleteTask(taskContainer);
+      });
     });
   }
-  return { createTask };
+
+  return { createTask, addToTodo, addToDoing, addToDone };
 })();
