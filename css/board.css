@@ -1,3 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
 /* ---- RESET/BASIC STYLING ---- */
 * {
   padding: 0;
@@ -123,6 +131,7 @@ body {
   gap: 16px;
   padding: 24px 32px;
   height: 100%;
+  margin-top: 1rem;
   justify-content: center;
 }
 

@@ -12,8 +12,6 @@
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     />
-
-    <script type="module" src="../scripts/index.js"></script>
     <script
       src="https://kit.fontawesome.com/c36cb32178.js"
       crossorigin="anonymous"
@@ -41,12 +39,12 @@
         <li>
           <a href="#">Recent</a>
           <ul>
-            <li><a href="#">Recent 1</a></li>
-            <li><a href="#">Recent 2</a></li>
-            <li><a href="#">Recent 3</a></li>
+            <li><a href="./board.html?id=architecture">Recent 1</a></li>
+            <li><a href="./board.html?id=morning-routine">Recent 2</a></li>
+            <li><a href="./board.html?id=school-subjects">Recent 3</a></li>
           </ul>
         </li>
-        <li><a href="#">Create</a></li>
+        <li id="create-btn"><a href="./board.html">Create</a></li>
       </ul>
     </nav>
     <!-- sidebar -->
@@ -75,16 +73,22 @@
         <div class="templates-popular">
           <h2>MOST POPULAR TEMPLATES</h2>
           <div class="container">
-            <div class="card">Template Sample</div>
-            <div class="card">Template Sample</div>
-            <div class="card">Template Sample</div>
+             <a href="./board.html?id=architecture"
+                ><div class="card" id="architecture">Architecture</div></a
+              >
+              <a href="./board.html?id=morning-routine"
+                ><div class="card" id="card2">Morning Routine</div></a
+              >
+              <a href="./board.html?id=school-subjects"
+                ><div class="card" id="card3">School Subjects</div></a
+              >
           </div>
         <div class="workspaces-user">
           <h2>YOUR WORKSPACES</h2>
             <div class="container">
-            <div class="card">Workspace Sample</div>
-            <div class="card">Workspace Sample</div>
-            <div class="card">Workspace Sample</div>
+            <div class="card">Adamson</div>
+            <div class="card">Upwork</div>
+            <div class="card">LinkedIn</div>
           </div>
       </div>
     </div>

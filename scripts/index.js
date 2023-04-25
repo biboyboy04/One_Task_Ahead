@@ -24,7 +24,7 @@ switch (id) {
     schoolSubjects();
     break;
   default:
-  // code block
+    break;
 }
 
 function architecture() {
