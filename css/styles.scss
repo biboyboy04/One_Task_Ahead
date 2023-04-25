@@ -1,7 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 body {
 }
 .content-container {
   display: flex;
+  height: 100%;
 }
 // Sidebar
 .sidebar {
@@ -148,5 +156,95 @@ hr {
     align-items: center;
     border-radius: 10px;
     text-align: center;
+  }
+}
+
+.recent-works {
+  margin-top: 12rem;
+  .container {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .card {
+    color: white;
+    background-color: #508068;
+    width: 250px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    text-align: center;
+  }
+}
+
+.schedule {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 4rem;
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .deadline {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 1.5rem;
+    width: 400px;
+    color: white;
+    background-color: #508068;
+    padding: 1rem;
+    padding-top: 1.5rem;
+    border-radius: 10px 10px 0px 0px;
+    font-weight: bold;
+  }
+  .deadline :nth-child(odd) {
+    color: #f1c50e;
+  }
+  .card {
+    color: white;
+    background-color: #508068;
+    width: 250px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .alert {
+    width: 430px;
+    background-color: #ddead1;
+    padding: 1rem;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .alert :nth-child(2) {
+    margin-top: 1rem;
+    font-weight: lighter;
+    color: #db7475;
+  }
+
+  .sched-button {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    button {
+      color: white;
+      background-color: #335b38;
+      border-radius: 2rem;
+      padding: 0.8rem 1.7rem;
+      border: none;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #508068;
+    }
   }
 }
