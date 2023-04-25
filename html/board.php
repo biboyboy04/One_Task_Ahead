@@ -21,7 +21,9 @@ session_start();
 
 <body>
   <nav>
-    <div class="logo">ONE TASK AHEAD</div>
+    <a href="./home.php">
+      <div class="logo">ONE TASK AHEAD</div>
+    </a>
     <ul>
       <li>
         <a href="./templates.php">Templates</a>
@@ -66,7 +68,19 @@ session_start();
     </ul>
   </nav>
   <div class="header">
-    <h1 id="project-name">NAME OF PROJECT</h1>
+    <h1 id="project-name">
+      <?php
+      if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $id = strtoupper($id); // Convert to uppercase
+        $id = str_replace('-', ' ', $id); // Replace "-" with spaces
+        echo $id; // Output: ARCHITECTURE
+      } else {
+        echo "New Task";
+      }
+      ?>
+
+    </h1>
     <h2>l Public l</h2>
     <i class="fa-sharp fa-regular fa-calendar fa-2xl" style="color: #ffffff"></i>
     <button>CALENDAR POWER-UP</button>

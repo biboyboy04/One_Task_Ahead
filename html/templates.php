@@ -21,7 +21,9 @@ session_start();
 
 <body>
   <nav>
-    <div class="logo">ONE TASK AHEAD</div>
+    <a href="./home.php">
+      <div class="logo">ONE TASK AHEAD</div>
+    </a>
     <ul>
       <li>
         <a href="./templates.php">Templates</a>
@@ -76,7 +78,7 @@ session_start();
           <a href="./templates.php">
             <li>Templates</li>
           </a>
-          <a href="#">
+          <a href="./home.php">
             <li>Home</li>
           </a>
         </ul>
@@ -103,13 +105,13 @@ session_start();
         <div class="templates-new">
           <h2>NEW & NOTABLE TEMPLATES</h2>
           <div class="container">
-            <a href="./board.html?id=architecture">
+            <a href="./board.php?id=architecture">
               <div class="card" id="architecture">Architecture</div>
             </a>
-            <a href="./board.html?id=morning-routine">
+            <a href="./board.php?id=morning-routine">
               <div class="card" id="card2">Morning Routine</div>
             </a>
-            <a href="./board.html?id=school-subjects">
+            <a href="./board.php?id=school-subjects">
               <div class="card" id="card3">School Subjects</div>
             </a>
           </div>

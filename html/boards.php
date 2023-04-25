@@ -21,7 +21,9 @@ session_start();
 
 <body>
   <nav>
-    <div class="logo">ONE TASK AHEAD</div>
+    <a href="./home.php">
+      <div class="logo">ONE TASK AHEAD</div>
+    </a>
     <ul>
       <li>
         <a href="./templates.php">Templates</a>
@@ -76,7 +78,7 @@ session_start();
           <a href="./templates.php">
             <li>Templates</li>
           </a>
-          <a href="#">
+          <a href="./home.php">
             <li>Home</li>
           </a>
         </ul>
