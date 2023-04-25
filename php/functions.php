@@ -197,7 +197,7 @@ function loginUser($conn, $username, $password)
         session_start();
         $_SESSION["user_id"] = $usernameExists["user_id"];
         $_SESSION["username"] = $usernameExists["username"];
-        header("location: ../html/index.html");
+        header("location: ../html/home.html");
         exit();
     }
 }
