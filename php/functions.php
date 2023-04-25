@@ -163,40 +163,41 @@ function userExists($conn, $username, $email)
 }
 
 
+
 //login
-function loginUser($conn, $username, $password)
+function emptyInputLogin($username, $password)
 {
-    $usernameExists =  userExists($conn, $username, $username);
-    session_start();
-    $_SESSION["user_id"] = $usernameExists["user_id"];
-    $_SESSION["username"] = $usernameExists["username"];
-    header("location: ../html/index.html");
-    exit();
+
+    if (empty($username) || empty($password)) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $result;
 }
 //!!!!!!!!!!!!!!!fix login error handlers
-function logincheck($conn, $username, $password)
+function loginUser($conn, $username, $password)
 {
-    global $username_return_error, $password_return_error;
+
     $usernameExists =  userExists($conn, $username, $username);
 
     if ($usernameExists === false) {
-        $result = true;
-        $username_return_error = "Username does not exist.";
-    } else {
-        $result = false;
-        $username_return_error = null;
+        header("location: ../html/OTA_Login.php?error=wronglogin");
+        exit();
     }
 
     $passwordHashed =  $usernameExists["password"];
     $checkPass = password_verify($password, $passwordHashed);
 
     if ($checkPass === false) {
-        $result = false;
-        $password_return_error = "Incorrect Pasword.";
+        header("location: ../html/OTA_Login.php?error=wronglogin");
+        exit();
     } else if ($checkPass === true) {
 
-        $result = false;
-        $password_return_error = null;
+        session_start();
+        $_SESSION["user_id"] = $usernameExists["user_id"];
+        $_SESSION["username"] = $usernameExists["username"];
+        header("location: ../html/index.html");
+        exit();
     }
-    return $result;
 }
