@@ -11,7 +11,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Board Name</title>
   <link rel="stylesheet" href="../css/normalize.css" />
-  <link rel="stylesheet" href="../css/board.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/nav_bar.css" />
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 
@@ -65,60 +65,54 @@ session_start();
       </div>
     </ul>
   </nav>
-  <div class="header">
-    <h1 id="project-name">NAME OF PROJECT</h1>
-    <h2>l Public l</h2>
-    <i class="fa-sharp fa-regular fa-calendar fa-2xl" style="color: #ffffff"></i>
-    <button>CALENDAR POWER-UP</button>
-    <button>FILTERS</button>
-  </div>
-  <div class="board">
-    <div class="pomodoro-timer">
-      <div class="timer">
-        <span id="minutes">25</span>:<span id="seconds">00</span>
+  <!-- sidebar -->
+  <div class="content-container">
+    <div class="sidebar">
+      <div class="links">
+        <ul>
+          <a href="./boards.php">
+            <li>Boards</li>
+          </a>
+          <a href="./templates.php">
+            <li>Templates</li>
+          </a>
+          <a href="#">
+            <li>Home</li>
+          </a>
+        </ul>
       </div>
-      <div class="buttons">
-        <button id="start">Start</button> <button id="stop">Stop</button>
-        <button id="reset">Reset</button>
-      </div>
-    </div>
-    <div class="todo-form-container">
-      <form id="todo-form">
-        <h2>Create a new task</h2>
-        <input name="name" type="text" placeholder="New TODO name..." id="todo-name-input" />
-
-        <textarea name="description" id="todo-description-input" cols="30" rows="10" placeholder="New TODO description..."></textarea>
-
-        <button type="submit">Add +</button>
-      </form>
-    </div>
-
-    <div class="lanes">
-      <div class="swim-lane" id="todo-lane" draggable="true">
-        <h3 class="heading">TODO</h3>
-        <button id="todo-submit" type="submit">Add +</button>
-      </div>
-
-      <div class="swim-lane" id="doing-lane" draggable="true">
-        <h3 class="heading">Doing</h3>
-      </div>
-
-      <div class="swim-lane" id="done-lane" draggable="true">
-        <h3 class="heading">Done</h3>
+      <hr />
+      <div class="workspace">
+        <div class="header">
+          <h2>Workspaces</h2>
+          <i class="fa-solid fa-circle-chevron-down fa-xl" style="color: #ffffff"></i>
+        </div>
       </div>
     </div>
-  </div>
-  <script>
-    function logId(id) {
-      console.log(id) // log the id to the console
-    }
-
-    // retrieve the parameter from the URL
-    var id = window.location.hash.substring(1)
-
-    // call the function with the parameter
-    logId(id)
-  </script>
+    <!-- content -->
+    <div class="content">
+      <div class="templates-popular">
+        <h2>MOST POPULAR TEMPLATES</h2>
+        <div class="container">
+          <a href="./board.html?id=architecture">
+            <div class="card" id="architecture">Architecture</div>
+          </a>
+          <a href="./board.html?id=morning-routine">
+            <div class="card" id="card2">Morning Routine</div>
+          </a>
+          <a href="./board.html?id=school-subjects">
+            <div class="card" id="card3">School Subjects</div>
+          </a>
+        </div>
+        <div class="workspaces-user">
+          <h2>YOUR WORKSPACES</h2>
+          <div class="container">
+            <div class="card">Adamson</div>
+            <div class="card">Upwork</div>
+            <div class="card">LinkedIn</div>
+          </div>
+        </div>
+      </div>
 </body>
 
 </html>
