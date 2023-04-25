@@ -1,9 +1,13 @@
+body {
+  display: flex;
+}
+
 .sidebar {
   display: flex;
   padding: 1rem;
   background-color: #508068;
   flex-direction: column;
-  width: 20%;
+  width: max(30%, 400px);
   height: 100vh;
 }
 
@@ -25,4 +29,104 @@
   border-radius: 20px;
   text-align: center;
   padding: 1rem 2rem;
+}
+
+hr {
+  width: 90%;
+}
+
+.workspace {
+  color: white;
+  padding: 1rem;
+}
+.workspace .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  background-color: #c5e4ae;
+  width: 100%;
+  padding: 2.5rem;
+}
+
+.categories-featured .container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+.categories-featured .card {
+  color: white;
+  background-color: #508068;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.templates-new {
+  margin-top: 3rem;
+}
+.templates-new .container {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.templates-new .card {
+  color: white;
+  background-color: #508068;
+  width: 250px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.workspaces-user,
+.templates-popular {
+  margin-top: 3rem;
+}
+.workspaces-user .container,
+.templates-popular .container {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.workspaces-user .card,
+.templates-popular .card {
+  color: white;
+  background-color: #508068;
+  width: 250px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.workspaces-user {
+  margin-top: 3rem;
+}
+.workspaces-user .container {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.workspaces-user .card {
+  color: white;
+  background-color: #508068;
+  width: 250px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
 }/*# sourceMappingURL=boards.css.map */

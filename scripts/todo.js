@@ -49,11 +49,13 @@ export const todoModule = (() => {
     taskButtons.classList.add("task-buttons");
 
     const editButton = document.createElement("button");
-    editButton.innerText = "Edit";
+    editButton.innerHTML =
+      '<i class="fa-solid fa-pen-to-square fa-lg" style="color: #ffffff;"></i>';
     editButton.classList.add("edit-button");
 
     const deleteButton = document.createElement("button");
-    deleteButton.innerText = "Delete";
+    deleteButton.innerHTML =
+      '<i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i>';
     deleteButton.classList.add("delete-button");
 
     taskButtons.appendChild(editButton);
