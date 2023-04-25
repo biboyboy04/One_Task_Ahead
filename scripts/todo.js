@@ -19,11 +19,13 @@ export const todoModule = (() => {
 
     const task = createTask(taskNameInput, taskDescriptionInput);
 
-    todoLane.appendChild(task);
+    const todoButton = document.getElementById("todo-submit");
+
+    todoLane.insertBefore(task, todoButton);
 
     // reset form value
     inputName.value = "";
-    inputDescription = "";
+    inputDescription.value = "";
   }
 
   function createTask(taskNameInput, taskDescriptionInput) {
@@ -47,11 +49,13 @@ export const todoModule = (() => {
     taskButtons.classList.add("task-buttons");
 
     const editButton = document.createElement("button");
-    editButton.innerText = "Edit";
+    editButton.innerHTML =
+      '<i class="fa-solid fa-pen-to-square fa-lg" style="color: #ffffff;"></i>';
     editButton.classList.add("edit-button");
 
     const deleteButton = document.createElement("button");
-    deleteButton.innerText = "Delete";
+    deleteButton.innerHTML =
+      '<i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i>';
     deleteButton.classList.add("delete-button");
 
     taskButtons.appendChild(editButton);
@@ -123,8 +127,8 @@ export const todoModule = (() => {
     const editCancelButton = document.createElement("button");
     editCancelButton.innerText = "Cancel";
 
-    editButtons.appendChild(editSubmitButton);
     editButtons.appendChild(editCancelButton);
+    editButtons.appendChild(editSubmitButton);
 
     editForm.appendChild(editNameInput);
     editForm.appendChild(editDescriptionInput);
