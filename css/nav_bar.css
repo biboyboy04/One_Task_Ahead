@@ -82,8 +82,82 @@ nav ul ul ul li {
   left: 150px;
 }
 
-#create-btn a {
-  background-color: #7faa75;
-  border-radius: 2rem;
-  padding: 0.7rem 1.5rem;
+#signupBtn {
+  margin-left: 2rem;
+  margin-right: 1.5rem;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  margin-top: -4px;
+}
+#signupBtn2 {
+  margin-left: 2rem;
+  margin-right: 1.5rem;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  margin-top: -10px;
+}
+
+#signupBtn3 {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  margin-top: -10px;
+}
+img {
+  width: 45px;
+  height: 45px;
+  margin-top: 0.1rem;
+  border-style: solid;
+  border-color: white;
+  border-radius: 50%;
+  border-width: 2px;
+  background-color: white;
+}
+
+.ppic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.6rem;
+  position: relative;
+}
+.logout {
+  position: absolute;
+  top: 70px; /* adjust the top value to match the position of the image */
+  left: 50%; /* center the dropdown horizontally */
+  transform: translateX(-50%); /* center the dropdown horizontally */
+  border-top: 3px solid green;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.logout li {
+  position: relative;
+  margin: 0px;
+  width: 150px;
+  float: none;
+  display: list-item;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.logout li a {
+  line-height: 50px;
+}
+
+/* modify the selector to apply the hover effect to the parent element */
+.ppic:hover .logout {
+  top: 66px; /* adjust the top value to move the dropdown downwards */
+  opacity: 1;
+  visibility: visible;
+}
+
+.ppic img {
+  /* adjust the size of the image */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }
