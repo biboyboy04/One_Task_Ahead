@@ -175,7 +175,7 @@ function emptyInputLogin($username, $password)
     }
     return $result;
 }
-//!!!!!!!!!!!!!!!fix login error handlers
+
 function loginUser($conn, $username, $password)
 {
 
@@ -197,7 +197,7 @@ function loginUser($conn, $username, $password)
         session_start();
         $_SESSION["user_id"] = $usernameExists["user_id"];
         $_SESSION["username"] = $usernameExists["username"];
-        header("location: ../html/home.php");
+        header("location: ../html/board.php"); //temporary testing.. Default is the home page
         exit();
     }
 }
