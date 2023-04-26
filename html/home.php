@@ -13,6 +13,7 @@ session_start();
     <link rel="stylesheet" href="../css/normalize.css" />
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/nav_bar.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 
     <script type="module" src="../scripts/index.js"></script>
@@ -121,6 +122,12 @@ session_start();
                 </div>
             </div>
         </div>
+    </div>
+
+    <footer>
+        <p>ONE TASK AHEAD © 2023</p>
+        <p>All Rights Reserved.</p>
+    </footer>
 </body>
 
 </html>

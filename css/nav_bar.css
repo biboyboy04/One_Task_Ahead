@@ -161,3 +161,9 @@ img {
   border-radius: 50%;
   object-fit: cover;
 }
+
+#create-btn a {
+  background-color: #7faa75;
+  border-radius: 2rem;
+  padding: 0.7rem 1.5rem;
+}

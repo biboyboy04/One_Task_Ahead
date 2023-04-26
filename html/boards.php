@@ -13,6 +13,7 @@ session_start();
   <link rel="stylesheet" href="../css/normalize.css" />
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/nav_bar.css" />
+  <link rel="stylesheet" href="../css/footer.css" />
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 
   <script type="module" src="../scripts/index.js"></script>
@@ -95,26 +96,36 @@ session_start();
     <div class="content">
       <div class="templates-popular">
         <h2>MOST POPULAR TEMPLATES</h2>
+        <p>Get going faster with a template from the community or
+          <span class="category-btn">choose a category
+            <i class="fa-solid fa-caret-down fa-lg" style="color: #ffffff; margin-left:5px;"></i></span>
+        </p>
         <div class="container">
-          <a href="./board.html?id=architecture">
+          <a href="./board.php?id=architecture">
             <div class="card" id="architecture">Architecture</div>
           </a>
-          <a href="./board.html?id=morning-routine">
+          <a href="./board.php?id=morning-routine">
             <div class="card" id="card2">Morning Routine</div>
           </a>
-          <a href="./board.html?id=school-subjects">
+          <a href="./board.php?id=school-subjects">
             <div class="card" id="card3">School Subjects</div>
           </a>
         </div>
-        <div class="workspaces-user">
-          <h2>YOUR WORKSPACES</h2>
-          <div class="container">
-            <div class="card">Adamson</div>
-            <div class="card">Upwork</div>
-            <div class="card">LinkedIn</div>
-          </div>
+      </div>
+      <div class="workspaces-user">
+        <h2>YOUR WORKSPACES</h2>
+        <div class="container">
+          <div class="card">Adamson</div>
+          <div class="card">Upwork</div>
+          <div class="card">LinkedIn</div>
         </div>
       </div>
+    </div>
+  </div>
+  <footer>
+    <p>ONE TASK AHEAD © 2023</p>
+    <p>All Rights Reserved.</p>
+  </footer>
 </body>
 
 </html>

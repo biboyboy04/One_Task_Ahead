@@ -20,8 +20,13 @@
   display: none;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   background-color: rgb(197, 228, 174);
+  height: 100vh;
 }
 
 .header {

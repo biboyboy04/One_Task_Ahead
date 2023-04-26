@@ -72,6 +72,9 @@ hr {
   width: 100%;
   padding: 2.5rem;
 }
+.content a {
+  text-decoration: none;
+}
 
 .categories-featured .container {
   display: flex;
@@ -90,6 +93,8 @@ hr {
   border-radius: 10px;
   text-align: center;
   padding: 0 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
 }
 
 .templates-new {
@@ -131,6 +136,13 @@ hr {
   align-items: center;
   border-radius: 10px;
   text-align: center;
+  padding: 0 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+.workspaces-user h2,
+.templates-popular h2 {
+  margin-bottom: 1rem;
 }
 
 .workspaces-user {
@@ -152,6 +164,9 @@ hr {
   align-items: center;
   border-radius: 10px;
   text-align: center;
+  padding: 0 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
 }
 
 .recent-works {
@@ -173,6 +188,9 @@ hr {
   align-items: center;
   border-radius: 10px;
   text-align: center;
+  padding: 0 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
 }
 
 .schedule {
@@ -241,4 +259,13 @@ hr {
 }
 .schedule .sched-button button:hover {
   background-color: #508068;
+}
+
+.category-btn {
+  background-color: #335b38;
+  color: white;
+  border-radius: 5px;
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
+  margin-left: 8px;
 }/*# sourceMappingURL=styles.css.map */

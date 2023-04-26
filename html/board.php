@@ -13,6 +13,7 @@ session_start();
   <link rel="stylesheet" href="../css/normalize.css" />
   <link rel="stylesheet" href="../css/board.css" />
   <link rel="stylesheet" href="../css/nav_bar.css" />
+  <link rel="stylesheet" href="../css/footer.css" />
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 
   <script type="module" src="../scripts/index.js"></script>
@@ -92,7 +93,7 @@ session_start();
         <span id="minutes">25</span>:<span id="seconds">00</span>
       </div>
       <div class="buttons">
-        <button id="start">Start</button> <button id="stop">Stop</button>
+        <button id="start">Start</button> <button id="stop">Pause</button>
         <button id="reset">Reset</button>
       </div>
     </div>
@@ -123,15 +124,6 @@ session_start();
     </div>
   </div>
   <script>
-    function logId(id) {
-      console.log(id) // log the id to the console
-    }
-
-    // retrieve the parameter from the URL
-    var id = window.location.hash.substring(1)
-
-    // call the function with the parameter
-    logId(id)
   </script>
 </body>
 
