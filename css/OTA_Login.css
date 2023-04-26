@@ -4,8 +4,8 @@
 
 html,
 body {
-  background: #fef9e6;
-  background: linear-gradient(90deg, #fef9e6 0%, #f0e4b8 50%, #fef9e6);
+  background: #c5e4ae;
+  background: linear-gradient(90deg, #c5e4ae 0%, #e4f3f3 50%, #c5e4ae);
   height: 100%;
   margin: 0px;
   padding: 0;
@@ -15,14 +15,14 @@ body {
 h1 {
   font-family: "Verdana";
   text-align: center;
-  color: rgb(91, 74, 74);
+  color: #445c4c;
 }
 
 .container {
   max-width: 400px;
   margin: 70px auto;
   padding: 26px;
-  border: 6px solid #836853;
+  border: 6px solid #334533;
   border-radius: 18px;
   box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.3);
   align-items: center;
@@ -33,13 +33,13 @@ h1 {
 
 @keyframes breathing-color {
   0% {
-    background-color: #f0e4b8;
+    background-color: #c5e4ae;
   }
   50% {
-    background-color: #f6e8db;
+    background-color: #e0f8cd;
   }
   100% {
-    background-color: #f0e4b8;
+    background-color: #c5e4ae;
   }
 }
 
@@ -49,23 +49,23 @@ h1 {
   padding: 12px;
   margin: 12px 0;
   display: inline-block;
-  border: 4px solid #836853;
+  border: 4px solid #215728;
   border-radius: 180px;
   box-sizing: border-box;
 }
 .container button[type="submit"] {
   margin: 8px;
-  background-color: #836853;
+  background-color: #215728;
   color: #fff;
   padding: 12px 20px;
-  border: 4px solid #836853;
+  border: 4px solid #215728;
   margin-left: 12px;
   border-radius: 180px;
   cursor: pointer;
   float: right;
 }
 .container button[type="submit"]:hover {
-  background-color: #b9af5a;
+  background-color: #508068;
 }
 .error {
   color: #af4242;
@@ -78,4 +78,14 @@ h1 {
   text-align: center;
   border-radius: 180px;
   border: 4px solid #cf1e1e;
+}
+a {
+  text-decoration: none;
+  font-family: "Verdana";
+  color: black;
+  font-weight: bold;
+}
+p {
+  font-family: "Verdana";
+  color: black;
 }

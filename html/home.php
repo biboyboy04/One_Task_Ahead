@@ -55,8 +55,8 @@ session_start();
                 <?php
                 if (isset($_SESSION['username'])) {
                     //for now there is no profile page
-                    echo '<a href="#" id="signupBtn">Hi, ' . $_SESSION['username'] . '</a>';
-                    echo '<a href="#"><img src="../images/profilepic.png"></a>';
+                    echo '<a href="../html/profilepage.php" id="signupBtn">Hi, ' . $_SESSION['username'] . '</a>';
+                    echo '<a href="../html/profilepage.php"><img src="../images/profilepic.png"></a>';
                     echo '<ul class="logout">';
                     echo '<li><a href="../php/logout.inc.php">Logout</a></li>';
                     echo '</ul>';

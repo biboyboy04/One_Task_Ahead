@@ -97,8 +97,10 @@
 
             <button type="submit" id="submit-btn" name="submit">Sign Up</button>
         </form>
-        <p>Already a User?</p>
-        <a href="../html/OTA_Login.php">Login</a>
+        <div class="center">
+            <p>Already a User?</p>
+            <a href="../html/OTA_Login.php">Login</a>
+        </div>
     </div>
 
 </body>
