@@ -195,7 +195,7 @@ function loginUser($conn, $username, $password)
     } else if ($checkPass === true) {
 
         session_start();
-        $_SESSION["user_id"] = $usernameExists["user_id"];
+        $_SESSION["id"] = $usernameExists["id"];
         $_SESSION["username"] = $usernameExists["username"];
         header("location: ../html/board.php"); //temporary testing.. Default is the home page
         exit();

@@ -1,0 +1,119 @@
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position:fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #508068;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #334533;
+  width: 35%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 8px 16px;
+  background-color: #508068;
+  color: white;
+}
+
+.modal-body {
+  padding: 2px 16px;
+  text-align: right;
+  background-color: #c5e4ae;
+}
+
+.contents {
+    display:flex;
+    align-items: right;
+    justify-content: center;
+    padding: 15px;
+    font-size: 20px;
+}
+.contents input {
+    margin-left: 2rem;
+    width:50%;
+    padding: .5rem;
+    font-size: 20px;
+}
+.submit-container input[type="submit" i]{
+    height: 35px;
+    width: 60px;
+    margin: 10px;
+}
+.submit-container {
+    margin-top: 30px;
+}
+.contents label {
+    padding-top: .5rem;
+}
+.modal-header h2 {
+  color: white;
+}
+.error {
+  color: #af4242;
+  background-color: #fde8ec;
+  padding: 10px;
+  display: none;
+  transform: translateY(-15px);
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: -10px;
+  border-radius: 5px;
+
+}
