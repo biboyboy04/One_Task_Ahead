@@ -6,6 +6,11 @@
   font-family: "Poppins", sans-serif;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .content-container {
   display: flex;
   height: 100%;
@@ -197,6 +202,7 @@ hr {
   margin-top: 1.5rem;
   display: flex;
   gap: 4rem;
+  flex-wrap: wrap;
 }
 .schedule .container {
   display: flex;
@@ -268,4 +274,34 @@ hr {
   padding: 0.7rem 1rem;
   font-size: 0.95rem;
   margin-left: 8px;
+}
+
+.categories {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background-color: #c5e4ae;
+  width: 100%;
+  padding: 1.5rem;
+}
+.categories a {
+  text-decoration: none;
+}
+.categories .container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.categories .card {
+  color: white;
+  background-color: #508068;
+  width: 250px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  text-align: center;
 }/*# sourceMappingURL=styles.css.map */
