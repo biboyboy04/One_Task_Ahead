@@ -162,18 +162,76 @@ function userExists($conn, $username, $email)
     mysqli_stmt_close($statement);
 }
 
-
-
-//login
-function emptyInputLogin($username, $password)
+function getTableRowById($conn, $table, $table_id, $id)
 {
+    $sql = "SELECT * FROM $table WHERE $table_id = $id";
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result);
+}
 
-    if (empty($username) || empty($password)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
+function getCategories($conn)
+{
+    $sql = "SELECT * FROM category";
+    $result = mysqli_query($conn, $sql);
     return $result;
+}
+
+function getCategoryTemplates($conn, $categ_id)
+{
+    $sql = "SELECT * FROM template WHERE categ_id = $categ_id";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
+function getTemplateTasks($conn, $temp_id)
+{
+    $sql = "SELECT * FROM task WHERE temp_id = $temp_id";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
+function renderCategories($result)
+{
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<a href="./category_templates.php?id=' . $row['categ_id'] . '"><div class="card">' . $row['categ_name'] . '</div></a>';
+        }
+    } else {
+        echo "No categories found.";
+    }
+}
+
+function renderTemplates($result)
+{
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<a href="./board.php?id=' . $row['template_id'] . '"><div class="card">' . $row['temp_name'] . '</div></a>';
+        }
+    } else {
+        echo "No categories found.";
+    }
+}
+
+
+function renderTasks($result)
+{
+    if (mysqli_num_rows($result) > 0) {
+        $count = 1;
+        while ($row = mysqli_fetch_assoc($result)) {
+
+            $title = $row['Title'];
+            $description = $row['Description'];
+            $lane = $row['Lane'];
+            echo "<script type='module'>
+            import { todoModule } from '../scripts/todo.js';
+            const task$count = todoModule.createTask('$title', '$description', '$lane');
+            todoModule.addTaskToActivity(task$count);
+          </script>";
+            $count++;
+        }
+    } else {
+        echo "No tasks found.";
+    }
 }
 
 function loginUser($conn, $username, $password)
