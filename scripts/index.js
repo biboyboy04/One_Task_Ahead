@@ -10,25 +10,6 @@ import "./pomodoro.js";
 
 dragAndDrop();
 
-//Get id of the previous link
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const id = urlParams.get("id");
-
-switch (id) {
-  case "architecture":
-    architecture();
-    break;
-  case "morning-routine":
-    morningRoutine();
-    break;
-  case "school-subjects":
-    schoolSubjects();
-    break;
-  default:
-    break;
-}
-
 // PUT INTO A MODULE
 const openModalBtn = document.querySelector("#todo-submit");
 const modalContainer = document.querySelector(".todo-form-container");

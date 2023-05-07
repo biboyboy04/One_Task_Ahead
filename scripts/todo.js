@@ -6,6 +6,23 @@ export const todoModule = (() => {
     addTask();
   });
 
+  function addTaskToActivity(activity) {
+    const activityData = activity.getAttribute("data-activity");
+    switch (activityData) {
+      case "todo":
+        addToTodo(activity);
+        break;
+      case "doing":
+        addToDoing(activity);
+        break;
+      case "done":
+        addToDone(activity);
+        break;
+      default:
+        break;
+    }
+  }
+
   function addToTodo(task) {
     const todoButton = document.getElementById("todo-submit");
     const todoLane = document.getElementById("todo-lane");
@@ -40,7 +57,7 @@ export const todoModule = (() => {
     inputDescription.value = "";
   }
 
-  function createTask(taskNameInput, taskDescriptionInput) {
+  function createTask(taskNameInput, taskDescriptionInput, activityLane) {
     // Create title and description
     const taskName = createTaskName(taskNameInput);
     const taskDescription = createTaskDescription(taskDescriptionInput);
@@ -48,6 +65,7 @@ export const todoModule = (() => {
     const newTaskContainer = document.createElement("div");
     newTaskContainer.classList.add("task");
     newTaskContainer.setAttribute("draggable", "true");
+    newTaskContainer.setAttribute("data-activity", activityLane);
 
     const taskContent = document.createElement("div");
     taskContent.classList.add("task-content");
@@ -187,5 +205,5 @@ export const todoModule = (() => {
     });
   }
 
-  return { createTask, addToTodo, addToDoing, addToDone };
+  return { createTask, addTaskToActivity };
 })();

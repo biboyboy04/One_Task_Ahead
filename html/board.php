@@ -1,5 +1,6 @@
 <?php
-session_start();
+include('../php/dbh.php');
+include('../php/functions.php');
 ?>
 
 <!DOCTYPE html>
@@ -90,7 +91,7 @@ session_start();
   <div class="board">
     <div class="pomodoro-timer">
       <div class="timer">
-        <span id="minutes">25</span>:<span id="seconds">00</span>
+        <span id="minutes">0</span>:<span id="seconds">03</span>
       </div>
       <div class="buttons">
         <button id="start">Start</button> <button id="stop">Pause</button>
@@ -109,6 +110,7 @@ session_start();
     </div>
 
     <div class="lanes">
+
       <div class="swim-lane" id="todo-lane" draggable="true">
         <h3 class="heading">TODO</h3>
         <button id="todo-submit" type="submit">Add +</button>
@@ -123,8 +125,14 @@ session_start();
       </div>
     </div>
   </div>
-  <script>
-  </script>
+
+  <?php
+  $temp_id = isset($_GET["id"]) ? $_GET["id"] : null;
+  $template = getTemplateTasks($conn, $temp_id);
+  renderTasks($template);
+  ?>
+
+
 </body>
 
 </html>

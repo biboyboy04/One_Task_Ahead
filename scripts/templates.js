@@ -1,6 +1,7 @@
 import { todoModule } from "./todo";
 
 export function architecture() {
+  addTaskToActivity();
   const task1 = todoModule.createTask(
     "Research local building codes",
     " Spend time reviewing the local building codes and regulations for a new project you'll be working on."
@@ -134,66 +135,3 @@ export function photography() {
   todoModule.addToDone(task3);
   todoModule.addToDone(task6);
 }
-
-
-
-
-
-// Arts and Design
-// -Photography
-
-// -Graphic Design
-
-// -Fashion Design
-
-// -Drawing
-
-// -Interior Design
-
-// Academics
-
-// -Writing a Research Paper
-
-// -Studying for an Exam
-
-// -Writing a Book Review
-
-// -Giving a Presentation
-
-// -Applying to Graduate School
-
-// Architecture and Engineering
-
-// -Designing a Building
-
-// -Conducting Structural Analysis
-
-// -Creating a 3D Model
-
-// -Conducting Energy Analysis
-
-// -Creating Technical Drawings
-
-//  Information Technology
-
-// -Developing a Software Application
-
-// -Implementing a Network Infrastructure
-
-// -Conducting a Security Assessment
-
-// -Creating a Database System
-
-// -Designing a User Interface
-
-// Personal
-
-// -Starting a Daily Exercise Routine
-
-// -Learning a New Language
-
-// -Starting a Personal Blog
-
-// -Planning a Trip
-
-// -Starting a Gratitude Practice
