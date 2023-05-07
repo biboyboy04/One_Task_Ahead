@@ -1,17 +1,20 @@
 <?php include('../php/header.php') ?>
+<?php include('../php/dbh.php') ?>
+<?php include('../php/functions.php') ?>
 <!-- content -->
 <div class="content">
     <div class="categories">
         <h2>CATEGORIES</h2>
         <div class="">
             <div class="container">
-                <a href="./category_templates.php">
+                <!-- <a href="./category_templates.php">
                     <div class="card">Arts and Design</div>
-                </a>
-                <div class="card">Academics</div>
-                <div class="card">Architecture and Engineering</div>
-                <div class="card">Information Technology</div>
-                <div class="card">Personal Boards</div>
+                </a> -->
+                <!-- a href="?page=request-management" -->
+                <?php
+                $categories = getCategories($conn);
+                renderCategories($categories);
+                ?>
             </div>
         </div>
     </div>
