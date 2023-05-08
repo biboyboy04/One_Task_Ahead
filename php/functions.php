@@ -162,6 +162,44 @@ function userExists($conn, $username, $email)
     mysqli_stmt_close($statement);
 }
 
+//login
+function emptyInputLogin($username, $password)
+{
+
+    if (empty($username) || empty($password)) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $result;
+}
+
+// function loginUser($conn, $username, $password)
+// {
+
+//     $usernameExists =  userExists($conn, $username, $username);
+
+//     if ($usernameExists === false) {
+//         header("location: ../html/OTA_Login.php?error=wronglogin");
+//         exit();
+//     }
+
+//     $passwordHashed =  $usernameExists["password"];
+//     $checkPass = password_verify($password, $passwordHashed);
+
+//     if ($checkPass === false) {
+//         header("location: ../html/OTA_Login.php?error=wronglogin");
+//         exit();
+//     } else if ($checkPass === true) {
+
+//         session_start();
+//         $_SESSION["id"] = $usernameExists["id"];
+//         $_SESSION["username"] = $usernameExists["username"];
+//         header("location: ../html/board.php"); //temporary testing.. Default is the home page
+//         exit();
+//     }
+// }
+
 function getTableRowById($conn, $table, $table_id, $id)
 {
     $sql = "SELECT * FROM $table WHERE $table_id = $id";
@@ -185,7 +223,7 @@ function getCategoryTemplates($conn, $categ_id)
 
 function getTemplateTasks($conn, $temp_id)
 {
-    $sql = "SELECT * FROM task WHERE temp_id = $temp_id";
+    $sql = "SELECT * FROM task WHERE temp_id = $temp_id;";
     $result = mysqli_query($conn, $sql);
     return $result;
 }
