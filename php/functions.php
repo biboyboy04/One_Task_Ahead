@@ -162,6 +162,7 @@ function userExists($conn, $username, $email)
     mysqli_stmt_close($statement);
 }
 
+<<<<<<< Updated upstream
 //login
 function emptyInputLogin($username, $password)
 {
@@ -199,6 +200,27 @@ function emptyInputLogin($username, $password)
 //         exit();
 //     }
 // }
+=======
+function updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $number)
+{
+    $sql = "UPDATE task
+SET task_number =
+  CASE
+    WHEN task_number = $number AND EXISTS (SELECT * FROM task WHERE Lane = '$activity' AND task_number = $number)
+      THEN $number + 1
+    WHEN Lane = '$activity' AND task_number >= $number
+      THEN task_number + 1
+    ELSE task_number
+  END,
+Title = '$task_name',
+Description = '$task_desc',
+Lane = '$activity'
+WHERE taskid = $task_id
+";
+    return mysqli_query($conn, $sql);
+}
+
+>>>>>>> Stashed changes
 
 function getTableRowById($conn, $table, $table_id, $id)
 {
@@ -221,12 +243,17 @@ function getCategoryTemplates($conn, $categ_id)
     return $result;
 }
 
-function getTemplateTasks($conn, $temp_id)
+function getTemplateTasks($conn, $temp_id, $lane)
 {
+<<<<<<< Updated upstream
     $sql = "SELECT * FROM task WHERE temp_id = $temp_id;";
+=======
+    $sql = "SELECT * FROM task WHERE temp_id = $temp_id AND Lane = '$lane' ORDER BY task_number ASC";
+>>>>>>> Stashed changes
     $result = mysqli_query($conn, $sql);
     return $result;
 }
+
 
 function renderCategories($result)
 {
@@ -250,27 +277,45 @@ function renderTemplates($result)
     }
 }
 
-
+// get id of task below. set current task based on id of task below
 function renderTasks($result)
 {
     if (mysqli_num_rows($result) > 0) {
-        $count = 1;
+        $count = 0;
         while ($row = mysqli_fetch_assoc($result)) {
-
-            $title = $row['Title'];
-            $description = $row['Description'];
-            $lane = $row['Lane'];
-            echo "<script type='module'>
-            import { todoModule } from '../scripts/todo.js';
-            const task$count = todoModule.createTask('$title', '$description', '$lane');
-            todoModule.addTaskToActivity(task$count);
-          </script>";
+            echo '<div class="task" draggable="true" data-id=' . $row["taskid"] . ' data-number=0>
+            <div class="task-content">
+                <h3 class="task-name">' . $row['Title'] . '</h3>
+                <p class="task-description">' . $row['Description'] . '</p>
+            </div>
+            <div class="task-buttons"><button class="edit-button"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #ffffff;"></i></button><button class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button></div>
+            </div>';
             $count++;
         }
-    } else {
-        echo "No tasks found.";
     }
 }
+
+// function renderTasks($result)
+// {
+//     if (mysqli_num_rows($result) > 0) {
+//         $count = 1;
+//         while ($row = mysqli_fetch_assoc($result)) {
+
+//             $title = $row['Title'];
+//             $description = $row['Description'];
+//             $lane = $row['Lane'];
+//             echo "<script type='module'>
+//             import { todoModule } from '../scripts/todo.js';
+//             const task$count = todoModule.createTask('$title', '$description', '$lane');
+//             todoModule.addTaskToActivity(task$count);
+//           </script>";
+
+//             $count++;
+//         }
+//     } else {
+//         echo "No tasks found.";
+//     }
+// }
 
 function loginUser($conn, $username, $password)
 {
