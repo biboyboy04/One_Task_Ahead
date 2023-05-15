@@ -162,7 +162,7 @@ function userExists($conn, $username, $email)
     mysqli_stmt_close($statement);
 }
 
-<<<<<<< Updated upstream
+
 //login
 function emptyInputLogin($username, $password)
 {
@@ -200,7 +200,7 @@ function emptyInputLogin($username, $password)
 //         exit();
 //     }
 // }
-=======
+
 function updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $number)
 {
     $sql = "UPDATE task
@@ -220,7 +220,7 @@ WHERE taskid = $task_id
     return mysqli_query($conn, $sql);
 }
 
->>>>>>> Stashed changes
+
 
 function getTableRowById($conn, $table, $table_id, $id)
 {
@@ -245,11 +245,11 @@ function getCategoryTemplates($conn, $categ_id)
 
 function getTemplateTasks($conn, $temp_id, $lane)
 {
-<<<<<<< Updated upstream
+
     $sql = "SELECT * FROM task WHERE temp_id = $temp_id;";
-=======
-    $sql = "SELECT * FROM task WHERE temp_id = $temp_id AND Lane = '$lane' ORDER BY task_number ASC";
->>>>>>> Stashed changes
+
+    $sql = "SELECT * FROM task WHERE temp_id = $temp_id AND Lane = '$lane'";
+
     $result = mysqli_query($conn, $sql);
     return $result;
 }

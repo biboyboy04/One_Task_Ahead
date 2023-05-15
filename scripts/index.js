@@ -1,8 +1,6 @@
 import { dragAndDrop } from "./drag.js";
 
-import { todoModule } from "./todo.js";
 
-import { architecture, morningRoutine, schoolSubjects } from "./templates.js";
 
 import "./pomodoro.js";
 

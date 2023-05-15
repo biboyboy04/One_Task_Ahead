@@ -16,7 +16,7 @@ include('../php/functions.php');
   <link rel="stylesheet" href="../css/nav_bar.css" />
   <link rel="stylesheet" href="../css/footer.css" />
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="module" src="../scripts/index.js"></script>
   <script src="https://kit.fontawesome.com/c36cb32178.js" crossorigin="anonymous"></script>
 </head>
@@ -96,6 +96,7 @@ include('../php/functions.php');
       <div class="buttons">
         <button id="start">Start</button> <button id="stop">Pause</button>
         <button id="reset">Reset</button>
+        <button id="save">Save</button>
       </div>
     </div>
     <div class="todo-form-container">
@@ -139,9 +140,84 @@ include('../php/functions.php');
     </div>
   </div>
 
+
+  <script>
+// Retrieve swim lanes
+const swimLanes = document.getElementsByClassName('swim-lane');
+
+// Iterate through each swim lane
+for (let i = 0; i < swimLanes.length; i++) {
+  const swimLane = swimLanes[i];
+  const activity = swimLane.dataset.activity; // Retrieve the data-activity value of the swim lane
+
+  // Retrieve tasks within the current swim lane
+  const tasks = swimLane.getElementsByClassName('task');
+
+  // Iterate through each task
+  for (let j = 0; j < tasks.length; j++) {
+    const task = tasks[j];
+    const taskName = task.querySelector('.task-name').textContent; // Retrieve the task name text
+    const taskDesc = task.querySelector('.task-description').textContent; // Retrieve the task description text
+
+    // Create a form dynamically for each task
+    const form = document.createElement('form');
+    form.action = '../php/update_task.php';
+    form.method = 'POST';
+
+    // Hidden input field for task ID
+    const taskIdInput = document.createElement('input');
+    taskIdInput.type = 'hidden';
+    taskIdInput.name = 'task_id';
+    taskIdInput.value = task.dataset.id;
+    form.appendChild(taskIdInput);
+
+    // Hidden input field for activity
+    const activityInput = document.createElement('input');
+    activityInput.type = 'hidden';
+    activityInput.name = 'activity';
+    activityInput.value = activity;
+    form.appendChild(activityInput);
+
+    // Input field for task name
+    const taskNameInput = document.createElement('input');
+    taskNameInput.type = 'text';
+    taskNameInput.name = 'task_name';
+    taskNameInput.value = taskName;
+    form.appendChild(taskNameInput);
+
+    // Textarea field for task description
+    const taskDescTextarea = document.createElement('textarea');
+    taskDescTextarea.name = 'task_desc';
+    taskDescTextarea.value = taskDesc;
+    form.appendChild(taskDescTextarea);
+
+    // Input field for task number
+    const taskNumberInput = document.createElement('input');
+    taskNumberInput.type = 'number';
+    taskNumberInput.name = 'task_number';
+    taskNumberInput.value = task.dataset.number;
+    form.appendChild(taskNumberInput);
+
+    // Submit button
+    const submitButton = document.querySelector('#save');
+ 
+
+    // Append the form to the document body
+    document.body.appendChild(form);
+
+    // Submit the form when the button is clicked
+    submitButton.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+      form.submit();
+    });
+  }
+}
+
+  </script>
 </body>
 
 </html>
 
 <!-- sort by activity and render by that -->
-<!-- if else so that theres no sorting -->
+<!-- if else so that theres no sorting -->|
+
