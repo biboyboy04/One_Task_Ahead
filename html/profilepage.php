@@ -107,7 +107,7 @@ $_SESSION['username'] = $userInfo['username'];
                 <h2>Edit Profile</h2>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
+                <form action="" method="post" >
                     <div class="contents">
                         <label>First Name:</label>
                         <input type="text" name="firstname" value="<?php echo $userInfo['first_name']?>" />
@@ -155,10 +155,6 @@ $_SESSION['username'] = $userInfo['username'];
         </div>
 
     </div>
-
-
-
-
 
 
 

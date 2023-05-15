@@ -27,16 +27,16 @@ if (isset($_POST['save'])) {
     $email = $_POST["email"];
 
 
-    // if (emptyInputProfile($firstname, $lastname, $email, $username) !== false) {
-    //     $firstname_error = $firstname_return_error;
-    //     $lastname_error = $lastname_return_error;
-    //     $email_error = $email_return_error;
-    //     $username_error = $username_return_error;
-    // }
-    // //to check invalid emails
-    // if (invalidEmail($email) !== false && !empty($email)) {
-    //     $email_error = $email_return_error;
-    // }
+    if (emptyInputProfile($firstname, $lastname, $email, $username) !== false) {
+        $firstname_error = $firstname_return_error;
+        $lastname_error = $lastname_return_error;
+        $email_error = $email_return_error;
+        $username_error = $username_return_error;
+    }
+    //to check invalid emails
+    if (invalidEmail($email) !== false && !empty($email)) {
+        $email_error = $email_return_error;
+    }
 
     // //to check invalid username
     // if (invalidUsername($username) !== false) {

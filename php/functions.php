@@ -289,11 +289,39 @@ function loginUser($conn, $username, $password)
         header("location: ../html/OTA_Login.php?error=wronglogin");
         exit();
     } else if ($checkPass === true) {
+        
+        if($usernameExists['access_lvl'] == 1){
 
+            session_start();
+            $_SESSION["id"] = $usernameExists["id"];
+            $_SESSION["username"] = $usernameExists["username"];
+            header("location: ../adminshit/Admin.php"); //temporary testing.. Default is the home page
+            exit();
+        }
+        if($usernameExists['access_lvl'] == 0){
+            
         session_start();
         $_SESSION["id"] = $usernameExists["id"];
         $_SESSION["username"] = $usernameExists["username"];
-        header("location: ../html/board.php"); //temporary testing.. Default is the home page
+        header("location: ../html/home.php"); //temporary testing.. Default is the home page
         exit();
+        }
     }
+}
+
+
+
+
+
+//profile form validation
+function emptyInputProfile($firstname, $lastname, $email, $username){
+
+    global $firstname_return_error, $lastname_return_error, $email_return_error, $username_return_error;
+
+    if (empty($firstname)){
+        return true;
+        $firstname_return_error = "Firstname must not be empty";
+    }
+
+    return false;
 }

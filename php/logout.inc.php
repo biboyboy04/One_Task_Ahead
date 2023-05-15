@@ -6,5 +6,5 @@ session_unset();
 
 session_destroy();
 
-header("location: ../html/board.php");
+header("location: ../html/home.php");
 exit();
