@@ -9,6 +9,7 @@ export const dragAndDrop = () => {
     });
     task.addEventListener("dragend", () => {
       task.classList.remove("is-dragging");
+      task.classList.add("drag-ended");
     });
   });
 

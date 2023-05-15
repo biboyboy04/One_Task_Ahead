@@ -201,22 +201,23 @@ function emptyInputLogin($username, $password)
 //     }
 // }
 
-function updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $number)
+function updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $task_number)
 {
-    $sql = "UPDATE task
-SET task_number =
-  CASE
-    WHEN task_number = $number AND EXISTS (SELECT * FROM task WHERE Lane = '$activity' AND task_number = $number)
-      THEN $number + 1
-    WHEN Lane = '$activity' AND task_number >= $number
-      THEN task_number + 1
-    ELSE task_number
-  END,
-Title = '$task_name',
-Description = '$task_desc',
-Lane = '$activity'
-WHERE taskid = $task_id
-";
+//     $sql = "UPDATE task
+// SET task_number =
+//   CASE
+//     WHEN task_number = $number AND EXISTS (SELECT * FROM task WHERE Lane = '$activity' AND task_number = $number)
+//       THEN $number + 1
+//     WHEN Lane = '$activity' AND task_number >= $number
+//       THEN task_number + 1
+//     ELSE task_number
+//   END,
+// Title = '$task_name',
+// Description = '$task_desc',
+// Lane = '$activity'
+// WHERE taskid = $task_id
+// ";
+$sql = "UPDATE task SET Title = '$task_name', Description = '$task_desc', Lane = '$activity', number = '$task_number' WHERE taskid = $task_id";
     return mysqli_query($conn, $sql);
 }
 
@@ -245,10 +246,7 @@ function getCategoryTemplates($conn, $categ_id)
 
 function getTemplateTasks($conn, $temp_id, $lane)
 {
-
-    $sql = "SELECT * FROM task WHERE temp_id = $temp_id;";
-
-    $sql = "SELECT * FROM task WHERE temp_id = $temp_id AND Lane = '$lane'";
+    $sql = "SELECT * FROM task WHERE temp_id = $temp_id AND Lane = '$lane' ORDER BY number ASC";
 
     $result = mysqli_query($conn, $sql);
     return $result;

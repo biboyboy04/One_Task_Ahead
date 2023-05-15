@@ -96,7 +96,8 @@ include('../php/functions.php');
       <div class="buttons">
         <button id="start">Start</button> <button id="stop">Pause</button>
         <button id="reset">Reset</button>
-        <button id="save">Save</button>
+        <button id="save">Save Tasks</button>
+
       </div>
     </div>
     <div class="todo-form-container">
@@ -142,80 +143,67 @@ include('../php/functions.php');
 
 
   <script>
-// Retrieve swim lanes
-const swimLanes = document.getElementsByClassName('swim-lane');
+ const submitButton = document.querySelector('#save');
+ // Submit the form when the button is clicked
+ submitButton.addEventListener('click', function(event) {
 
-// Iterate through each swim lane
-for (let i = 0; i < swimLanes.length; i++) {
-  const swimLane = swimLanes[i];
-  const activity = swimLane.dataset.activity; // Retrieve the data-activity value of the swim lane
+  event.preventDefault(); // Prevent the default form submission behavior
+  const taskData = []; // Array to store task data
+  const swimLanes = document.getElementsByClassName('swim-lane');
+  // Iterate through each swim lane
+  for (let i = 0; i < swimLanes.length; i++) {
+    const swimLane = swimLanes[i];
+    const activity = swimLane.dataset.activity; // Retrieve the data-activity value of the swim lane
 
-  // Retrieve tasks within the current swim lane
-  const tasks = swimLane.getElementsByClassName('task');
+    // Retrieve tasks within the current swim lane
+    const tasks = swimLane.getElementsByClassName('task');
 
-  // Iterate through each task
-  for (let j = 0; j < tasks.length; j++) {
-    const task = tasks[j];
-    const taskName = task.querySelector('.task-name').textContent; // Retrieve the task name text
-    const taskDesc = task.querySelector('.task-description').textContent; // Retrieve the task description text
+    // Iterate through each task
+    for (let j = 0; j < tasks.length; j++) {
+      const task = tasks[j];
+      const taskName = task.querySelector('.task-name').textContent; // Retrieve the task name text
+      const taskDesc = task.querySelector('.task-description').textContent; // Retrieve the task description text
 
-    // Create a form dynamically for each task
-    const form = document.createElement('form');
-    form.action = '../php/update_task.php';
-    form.method = 'POST';
+      // Create a task object with the task data
+      const taskObj = {
+        task_id: task.dataset.id,
+        activity: activity,
+        task_name: taskName,
+        task_desc: taskDesc,
+        task_number: j
+      };
 
-    // Hidden input field for task ID
-    const taskIdInput = document.createElement('input');
-    taskIdInput.type = 'hidden';
-    taskIdInput.name = 'task_id';
-    taskIdInput.value = task.dataset.id;
-    form.appendChild(taskIdInput);
-
-    // Hidden input field for activity
-    const activityInput = document.createElement('input');
-    activityInput.type = 'hidden';
-    activityInput.name = 'activity';
-    activityInput.value = activity;
-    form.appendChild(activityInput);
-
-    // Input field for task name
-    const taskNameInput = document.createElement('input');
-    taskNameInput.type = 'text';
-    taskNameInput.name = 'task_name';
-    taskNameInput.value = taskName;
-    form.appendChild(taskNameInput);
-
-    // Textarea field for task description
-    const taskDescTextarea = document.createElement('textarea');
-    taskDescTextarea.name = 'task_desc';
-    taskDescTextarea.value = taskDesc;
-    form.appendChild(taskDescTextarea);
-
-    // Input field for task number
-    const taskNumberInput = document.createElement('input');
-    taskNumberInput.type = 'number';
-    taskNumberInput.name = 'task_number';
-    taskNumberInput.value = task.dataset.number;
-    form.appendChild(taskNumberInput);
-
-    // Submit button
-    const submitButton = document.querySelector('#save');
- 
-
-    // Append the form to the document body
-    document.body.appendChild(form);
-
-    // Submit the form when the button is clicked
-    submitButton.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent the default form submission behavior
-      form.submit();
-    });
+      // Push the task object to the taskData array
+      taskData.push(taskObj);
+    }
   }
-}
+
+  // Convert the taskData array to a JSON string
+  const taskDataJSON = JSON.stringify(taskData);
+
+  // Create a form dynamically for sending the task data to PHP
+  const form = document.createElement('form');
+  form.action = '../php/update_task.php';
+  form.method = 'POST';
+
+  const taskDataInput = document.createElement('input');
+  taskDataInput.type = 'hidden';
+  taskDataInput.name = 'task_data';
+  taskDataInput.value = taskDataJSON;
+
+  form.appendChild(taskDataInput);
+  // Submit button
+
+  
+  // Append the form to the document body
+  document.body.appendChild(form);
+
+    form.submit();
+ });
 
   </script>
-</body>
 
+</body>
 </html>
 
 <!-- sort by activity and render by that -->
