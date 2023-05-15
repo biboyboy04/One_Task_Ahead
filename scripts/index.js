@@ -9,6 +9,7 @@ import "./pomodoro.js";
 // call the timer function with a duration of 30 seconds
 
 dragAndDrop();
+console.log(document.querySelector("moved"));
 
 // PUT INTO A MODULE
 const openModalBtn = document.querySelector("#todo-submit");

@@ -111,28 +111,37 @@ include('../php/functions.php');
 
     <div class="lanes">
 
-      <div class="swim-lane" id="todo-lane" draggable="true">
+      <div class="swim-lane" id="todo-lane" draggable="true" data-activity="todo">
         <h3 class="heading">TODO</h3>
+        <?php
+        $temp_id = isset($_GET["id"]) ? $_GET["id"] : null;
+        $template = getTemplateTasks($conn, $temp_id, "todo");
+        renderTasks($template);
+        ?>
         <button id="todo-submit" type="submit">Add +</button>
       </div>
 
-      <div class="swim-lane" id="doing-lane" draggable="true">
+      <div class="swim-lane" id="doing-lane" draggable="true" data-activity="doing">
         <h3 class="heading">Doing</h3>
+        <?php
+        $template = getTemplateTasks($conn, $temp_id, "doing");
+        renderTasks($template);
+        ?>
       </div>
 
-      <div class="swim-lane" id="done-lane" draggable="true">
+      <div class="swim-lane" id="done-lane" draggable="true" data-activity="done">
         <h3 class="heading">Done</h3>
+        <?php
+        $template = getTemplateTasks($conn, $temp_id, "done");
+        renderTasks($template);
+        ?>
       </div>
     </div>
   </div>
 
-  <?php
-  $temp_id = isset($_GET["id"]) ? $_GET["id"] : null;
-  $template = getTemplateTasks($conn, $temp_id);
-  renderTasks($template);
-  ?>
-
-
 </body>
 
 </html>
+
+<!-- sort by activity and render by that -->
+<!-- if else so that theres no sorting -->
