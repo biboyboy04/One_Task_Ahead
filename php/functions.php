@@ -289,27 +289,27 @@ function renderTemplates($result)
     }
 }
 
-// get id of task below. set current task based on id of task below
 function renderTasks($result)
 {
     if (mysqli_num_rows($result) > 0) {
         $count = 0;
         while ($row = mysqli_fetch_assoc($result)) {      
-    echo '<div class="task" draggable="true" data-id=' . $row["taskid"] . ' data-number=0>
-        <div class="task-content">
-            <h3 class="task-name">' . $row['Title'] . '</h3>
-            <p class="task-description">' . $row['Description'] . '</p>
-        </div>
-        <div class="task-buttons">
-            <button class="edit-button"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #ffffff;">
-            </i></button>
-            <form action="../php/delete_task.php" method="POST" onclick="return confirm(\'Are you sure you want to delete this task?\');">
-                <input type="hidden" name="task_id" value="' . $row["taskid"] . '">
-                <button type="submit" class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
-            </form>
-        </div>
-    </div>';
-    $count++;
+            echo '<div class="task" draggable="true" data-id="' . $row["taskid"] . '" data-number="' . $row["number"] . '"data-activity="' . $row["Lane"] . '">
+                <div class="task-content">
+                    <h3 class="task-name">' . $row['Title'] . '</h3>
+                    <p class="task-description">' . $row['Description'] . '</p>
+                </div>
+                <div class="task-buttons">
+                    <button class="edit-button" onclick="openModal(' . $row['taskid'] . ', \'' . $row['Title'] . '\', \'' . $row['Description'] . '\', \'' . $row['Lane'] . '\', \'' . $row['number'] . '\')">
+                        <i class="fa-solid fa-pen-to-square fa-lg" style="color: #ffffff;"></i>
+                    </button>
+                    <form class="delete-task-form">
+                        <input type="hidden" name="task_id" value="' . $row["taskid"] . '">
+                        <button type="button" class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
+                    </form>
+                </div>
+            </div>';
+            $count++;
         }
     }
 }

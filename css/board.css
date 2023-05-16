@@ -78,6 +78,7 @@ body {
   z-index: 9999;
 }
 
+
 #todo-form {
   position: absolute;
   top: 45%;
@@ -127,6 +128,70 @@ body {
 .modal-open {
   overflow: hidden;
 }
+
+/* ---- MODAL ---- */
+.edit-form-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+
+#edit-form {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #508068;
+  color: white;
+  padding: 2rem;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 10px;
+}
+#edit-form input,
+#edit-form textarea {
+  padding: 12px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  background: white;
+  font-size: 14px;
+  outline: none;
+}
+#edit-form button[type=submit] {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  background: #ffffff;
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+#edit-form::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: -1;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
 
 /* ---- BOARD ---- */
 .lanes {
@@ -234,46 +299,6 @@ body {
   background-color: #dcdcdc;
 }
 
-#edit-form {
-  width: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background-color: white;
-  padding: 0.5rem;
-}
-#edit-form .button-container {
-  display: flex;
-  justify-content: space-between;
-}
-#edit-form input,
-#edit-form textarea {
-  padding: 12px;
-  border-radius: 4px;
-  border: none;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
-  background: white;
-  font-size: 14px;
-  outline: none;
-}
-#edit-form input {
-  font-weight: bolder;
-  font-size: 1.2rem;
-}
-#edit-form textarea {
-  resize: none;
-}
-#edit-form button {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: none;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
-  background: #ffffff;
-  color: black;
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
-}
 
 .pomodoro-timer .timer {
   font-size: 48px;
