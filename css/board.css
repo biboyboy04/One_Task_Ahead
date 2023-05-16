@@ -300,3 +300,18 @@ body {
 .pomodoro-timer .buttons {
   text-align: center;
 }/*# sourceMappingURL=board.css.map */
+
+#save {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #215728;
+  color: white;
+  border: none;
+  border-radius: 15px;
+}
+
+#save:hover {
+  background-color: #508068;
+}

@@ -7,7 +7,6 @@ import "./pomodoro.js";
 // call the timer function with a duration of 30 seconds
 
 dragAndDrop();
-console.log(document.querySelector("moved"));
 
 // PUT INTO A MODULE
 const openModalBtn = document.querySelector("#todo-submit");
@@ -33,6 +32,7 @@ const myForm = document.getElementById("todo-form");
 
 myForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  myForm.submit();
   // handle form submission here
   closeModal();
 });

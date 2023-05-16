@@ -206,24 +206,34 @@ function emptyInputLogin($username, $password)
 //     }
 // }
 
-function updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $number)
+function updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $task_number)
 {
-    $sql = "UPDATE task
-SET task_number =
-  CASE
-    WHEN task_number = $number AND EXISTS (SELECT * FROM task WHERE Lane = '$activity' AND task_number = $number)
-      THEN $number + 1
-    WHEN Lane = '$activity' AND task_number >= $number
-      THEN task_number + 1
-    ELSE task_number
-  END,
-Title = '$task_name',
-Description = '$task_desc',
-Lane = '$activity'
-WHERE taskid = $task_id
-";
+
+$sql = "UPDATE task SET Title = '$task_name', Description = '$task_desc', Lane = '$activity', number = '$task_number' WHERE taskid = $task_id";
     return mysqli_query($conn, $sql);
 }
+
+function addTask($conn, $temp_id, $task_name, $task_desc, $activity)
+{
+    // Get the highest task number for the given activity
+    $query = "SELECT MAX(number) AS max_number FROM task WHERE Lane = '$activity'";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    $max_number = $row['max_number'];
+
+    // Increment the task number by 1
+    $task_number = $max_number + 1;
+
+    // Insert the task into the database
+    $sql = "INSERT INTO task (Title, Description, Lane, temp_id, number) VALUES ('$task_name', '$task_desc', '$activity', '$temp_id', '$task_number')";
+    return mysqli_query($conn, $sql);
+}
+
+function deleteTask($conn, $task_id) {
+    $sql = "DELETE FROM task WHERE taskid = $task_id";
+    return mysqli_query($conn, $sql);
+}
+
 
 
 
@@ -250,10 +260,7 @@ function getCategoryTemplates($conn, $categ_id)
 
 function getTemplateTasks($conn, $temp_id, $lane)
 {
-
-    $sql = "SELECT * FROM task WHERE temp_id = $temp_id;";
-
-    $sql = "SELECT * FROM task WHERE temp_id = $temp_id AND Lane = '$lane'";
+    $sql = "SELECT * FROM task WHERE temp_id = $temp_id AND Lane = '$lane' ORDER BY number ASC";
 
     $result = mysqli_query($conn, $sql);
     return $result;
@@ -287,15 +294,22 @@ function renderTasks($result)
 {
     if (mysqli_num_rows($result) > 0) {
         $count = 0;
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo '<div class="task" draggable="true" data-id=' . $row["taskid"] . ' data-number=0>
-            <div class="task-content">
-                <h3 class="task-name">' . $row['Title'] . '</h3>
-                <p class="task-description">' . $row['Description'] . '</p>
-            </div>
-            <div class="task-buttons"><button class="edit-button"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #ffffff;"></i></button><button class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button></div>
-            </div>';
-            $count++;
+        while ($row = mysqli_fetch_assoc($result)) {      
+    echo '<div class="task" draggable="true" data-id=' . $row["taskid"] . ' data-number=0>
+        <div class="task-content">
+            <h3 class="task-name">' . $row['Title'] . '</h3>
+            <p class="task-description">' . $row['Description'] . '</p>
+        </div>
+        <div class="task-buttons">
+            <button class="edit-button"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #ffffff;">
+            </i></button>
+            <form action="../php/delete_task.php" method="POST" onclick="return confirm(\'Are you sure you want to delete this task?\');">
+                <input type="hidden" name="task_id" value="' . $row["taskid"] . '">
+                <button type="submit" class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
+            </form>
+        </div>
+    </div>';
+    $count++;
         }
     }
 }
