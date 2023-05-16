@@ -1,5 +1,8 @@
 <?php
 session_start();
+include "../php/dbh.php";
+include "includes/functions.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +80,9 @@ session_start();
 
                 <tbody>
 
+                <?php
+                    displaytemps($conn);
+                ?>
 
                 </tbody>
         </div>

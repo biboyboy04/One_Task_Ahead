@@ -98,6 +98,11 @@ function passMatch($password, $rptpassword)
     return $result;
 }
 
+//access type
+function accessType($conn){
+    // for edit access level
+    
+}
 
 
 //create user
@@ -114,12 +119,12 @@ function createUser($conn, $firstname, $lastname, $email, $username, $password)
     //hash password
     $hashedpass = password_hash($password, PASSWORD_DEFAULT);
 
-
     mysqli_stmt_bind_param($statement, "sssss", $firstname, $lastname, $username, $email, $hashedpass);
     mysqli_stmt_execute($statement);
     mysqli_stmt_close($statement);
     header("location: ../html/signup.php?error=success");
     exit();
+
 }
 
 
@@ -334,8 +339,8 @@ function loginUser($conn, $username, $password)
         header("location: ../html/OTA_Login.php?error=wronglogin");
         exit();
     } else if ($checkPass === true) {
-        
-        if($usernameExists['access_lvl'] == 1){
+
+        if ($usernameExists['access_lvl'] == 1) {
 
             session_start();
             $_SESSION["id"] = $usernameExists["id"];
@@ -343,13 +348,13 @@ function loginUser($conn, $username, $password)
             header("location: ../adminshit/Admin.php"); //temporary testing.. Default is the home page
             exit();
         }
-        if($usernameExists['access_lvl'] == 0){
-            
-        session_start();
-        $_SESSION["id"] = $usernameExists["id"];
-        $_SESSION["username"] = $usernameExists["username"];
-        header("location: ../html/home.php"); //temporary testing.. Default is the home page
-        exit();
+        if ($usernameExists['access_lvl'] == 0) {
+
+            session_start();
+            $_SESSION["id"] = $usernameExists["id"];
+            $_SESSION["username"] = $usernameExists["username"];
+            header("location: ../html/home.php"); //temporary testing.. Default is the home page
+            exit();
         }
     }
 }
@@ -359,11 +364,12 @@ function loginUser($conn, $username, $password)
 
 
 //profile form validation
-function emptyInputProfile($firstname, $lastname, $email, $username){
+function emptyInputProfile($firstname, $lastname, $email, $username)
+{
 
     global $firstname_return_error, $lastname_return_error, $email_return_error, $username_return_error;
 
-    if (empty($firstname)){
+    if (empty($firstname)) {
         return true;
         $firstname_return_error = "Firstname must not be empty";
     }

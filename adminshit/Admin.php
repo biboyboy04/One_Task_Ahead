@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+include "../php/dbh.php";
+include "includes/functions.php";
 ?>
 
 
@@ -46,17 +47,19 @@ session_start();
             </div>
 
             <div class="profile">
-                <p><?php echo $_SESSION['username']?></p>
+                <p><?php echo $_SESSION['username'] ?></p>
                 <img src="img/admin.png" alt="">
             </div>
         </div>
         <h3 class="i-name"> User Accounts </h3>
         <div class="values">
-            <div class="val-box">
+            <div class="val-box"> <h3> <?php echo totalUsers($conn); ?></h3>
                 <i class="fas fa-users"></i>
                 <div>
+                    
                     <span>Number of Users</span>
                 </div>
+               
             </div>
 
             <div class="val-box">
@@ -78,12 +81,12 @@ session_start();
                     </tr>
                 </thead>
 
-                <tbody> 
+                <tbody>
 
-                <!-- display users -->
-                <?php
-                
-                ?>
+                    <!-- display users -->
+                    <?php
+                    displayUsers($conn);
+                    ?>
 
                 </tbody>
         </div>
