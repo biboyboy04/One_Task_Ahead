@@ -101,14 +101,29 @@ include('../php/functions.php');
       </div>
     </div>
     <div class="todo-form-container">
-      <form id="todo-form">
-        <h2>Create a new task</h2>
-        <input name="name" type="text" placeholder="New TODO name..." id="todo-name-input" />
+        <?php
+        $temp_id = isset($_GET["id"]) ? $_GET["id"] : null;
+        ?>
+        <form id="todo-form" action='../php/add_task.php' method="POST">
+            <h2>Create a new task</h2>
+            <input name="name" type="text" placeholder="New TODO name..." id="todo-name-input" />
+            <textarea name="description" id="todo-description-input" cols="30" rows="10" placeholder="New TODO description..."></textarea>
+            <input type="hidden" name="temp_id" value="<?php echo $temp_id; ?>">
+            <button type="submit">Add +</button>
+        </form>
+    </div>
 
-        <textarea name="description" id="todo-description-input" cols="30" rows="10" placeholder="New TODO description..."></textarea>
-
-        <button type="submit">Add +</button>
-      </form>
+    <div class="edit-form-container">
+        <?php
+        $temp_id = isset($_GET["id"]) ? $_GET["id"] : null;
+        ?>
+        <form id="edit-form" action='../php/add_task.php' method="POST">
+            <h2>Create a new task</h2>
+            <input name="name" type="text" placeholder="New task name..." id="edit-name-input" />
+            <textarea name="description" id="edit-description-input" cols="30" rows="10" placeholder="New task description..."></textarea>
+            <input type="hidden" name="temp_id" value="<?php echo $temp_id; ?>">
+            <button type="submit">Add +</button>
+        </form>
     </div>
 
     <div class="lanes">
