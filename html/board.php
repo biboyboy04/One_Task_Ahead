@@ -183,7 +183,7 @@ $(document).ready(function() {
       success: function(response) {
         // Append the new task HTML to the swim lane
         const newTask = `
-          <div class="task" draggable="true" data-id="${response.taskid}" data-number="${response.number}">
+          <div class="task" draggable="true" data-id="${response.taskid}" data-number="${response.number}" data-activity="${response.lane}">
             <div class="task-content">
               <h3 class="task-name">${response.title}</h3>
               <p class="task-description">${response.description}</p>
@@ -194,14 +194,19 @@ $(document).ready(function() {
               </button>
               <form class="delete-task-form">
                 <input type="hidden" name="task_id" value="${response.taskid}">
-                <button type="button" class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
+                <button type="button" class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>te on task
               </form>
             </div>
           </div>
         `;
         const todoButton = document.getElementById("todo-submit");
         const todoLane = document.getElementById("todo-lane");
-        $(newTask).insertBefore(todoButton);
+        const newTaskElement = $(newTask).insertBefore(todoButton);
+
+        // Attach the event listener for the delete button to the newly created task element
+        newTaskElement.find('.delete-button').click(function(event) {
+          event.preventDefault();
+        });
 
         // Clear the form inputs
         $('#todo-name-input').val('');

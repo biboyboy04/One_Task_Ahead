@@ -8,7 +8,6 @@ export const dragAndDrop = () => {
     });
     task.addEventListener("dragend", () => {
       task.classList.remove("is-dragging");
-      task.classList.add("drag-ended");
     });
   });
 
@@ -58,8 +57,8 @@ export const dragAndDrop = () => {
 
     droppables.forEach((zone) => {
       const activity = zone.getAttribute("data-activity");
-
       zone.querySelectorAll(".task").forEach((task, index) => {
+        task.dataset.activity = activity;
         const taskId = task.getAttribute("data-id");
         const taskName = task.querySelector(".task-name").textContent;
         const taskDesc = task.querySelector(".task-description").textContent;
