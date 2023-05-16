@@ -17,6 +17,7 @@ export const dragAndDrop = () => {
 
       const bottomTask = insertAboveTask(zone, e.clientY);
       const curTask = document.querySelector(".is-dragging");
+      console.log(curTask);
 
       if (!bottomTask) {
         if (zone.id === "todo-lane") {

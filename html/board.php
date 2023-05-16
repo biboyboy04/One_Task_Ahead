@@ -194,7 +194,7 @@ $(document).ready(function() {
               </button>
               <form class="delete-task-form">
                 <input type="hidden" name="task_id" value="${response.taskid}">
-                <button type="button" class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>te on task
+                <button type="button" class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
               </form>
             </div>
           </div>
@@ -207,6 +207,14 @@ $(document).ready(function() {
         newTaskElement.find('.delete-button').click(function(event) {
           event.preventDefault();
         });
+
+      // Attach the event listeners for the new task element
+      newTaskElement.on("dragstart", () => {
+      newTaskElement.addClass("is-dragging");
+      });
+      newTaskElement.on("dragend", () => {
+        newTaskElement.removeClass("is-dragging");
+      });
 
         // Clear the form inputs
         $('#todo-name-input').val('');
