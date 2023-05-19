@@ -1,26 +1,27 @@
 <?php include('../php/header.php') ?>
+<?php include('../php/dbh.php') ?>
+<?php include('../php/functions.php') ?>
 <!-- content -->
 <div class="content">
   <div class="categories-featured">
     <h2>FEATURED CATEGORIES</h2>
     <div class="container">
-      <div class="card">Arts and Design</div>
-      <div class="card">Academics</div>
-      <div class="card">Architecture and Engineering</div>
-      <div class="card">Information Technology</div>
-      <div class="card">Personal Boards</div>
+    <?php
+        $categories = getCategories($conn);
+        renderCategories($categories);
+      ?>
     </div>
     <div class="templates-new">
       <h2>NEW & NOTABLE TEMPLATES</h2>
       <div class="container">
-        <a href="./board.php?id=architecture">
-          <div class="card" id="architecture">Architecture</div>
+        <a href="./board.php?id=25">
+          <div class="card" id="card1">Starting a Gratitude Practice</div>
         </a>
-        <a href="./board.php?id=morning-routine">
-          <div class="card" id="card2">Morning Routine</div>
+        <a href="./board.php?id=23">
+          <div class="card" id="card2">Planning Trip</div>
         </a>
-        <a href="./board.php?id=school-subjects">
-          <div class="card" id="card3">School Subjects</div>
+        <a href="./board.php?id=24">
+          <div class="card" id="card3">Starting a Personal Blog</div>
         </a>
       </div>
     </div>
