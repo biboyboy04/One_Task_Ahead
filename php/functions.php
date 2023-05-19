@@ -314,8 +314,8 @@ function renderTasks($result)
     if (mysqli_num_rows($result) > 0) {
         $count = 0;
         while ($row = mysqli_fetch_assoc($result)) {
-            echo '<div class="task" draggable="true" data-id="' . $row["task_id"] . '" data-number="' . $row["number"] . '" data-activity="' . $row["Lane"] . '">
-                <div class="task-content">
+            echo '<div class="task" draggable="true" data-id="' . $row["task_id"] . '" data-number="' . $row["number"] . '" data-activity="' . $row["Lane"] . '" data-workspace="' . (isset($_GET['workspace_id']) ? intval($_GET['workspace_id']) : 1) . '">
+            <div class="task-content">
                     <h3 class="task-name">' . $row['Title'] . '</h3>
                     <p class="task-description">' . $row['Description'] . '</p>
                 </div>

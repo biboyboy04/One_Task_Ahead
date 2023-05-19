@@ -63,13 +63,15 @@ export const dragAndDrop = () => {
         const taskId = task.getAttribute("data-id");
         const taskName = task.querySelector(".task-name").textContent;
         const taskDesc = task.querySelector(".task-description").textContent;
+        const workspaceId = task.getAttribute("data-workspace");
 
         const taskObj = {
           task_id: taskId,
           activity: activity,
           task_name: taskName,
           task_desc: taskDesc,
-          task_number: index
+          task_number: index,
+          workspace_id: workspaceId
         };
 
         taskData.push(taskObj);

@@ -29,6 +29,11 @@ body {
   height: 100vh;
 }
 
+.swim-lane {
+  overflow-y: scroll;
+}
+
+
 .header {
   display: flex;
   background-color: #215728;

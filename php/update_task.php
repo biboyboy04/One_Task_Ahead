@@ -17,17 +17,18 @@ foreach ($taskData as $task) {
   $task_name = $task['task_name'];
   $task_desc = $task['task_desc'];
   $task_number = $task['task_number'];
+  $workspace_id = $task['workspace_id'];
+
 
   // Perform actions with the task data
   // ...
 
   // Example: Update the task in the database
-  updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $task_number);
+  updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $task_number, $workspace_id);
   echo 'Task data received and processed successfully.';
-  echo "<script>console.log('Task ID: $task_id, Activity: $activity, Task Name: $task_name, Task Description: $task_desc, Task Number: $task_number');</script>";
+  echo "<script>console.log('$workspace_id,Task ID: $task_id, Activity: $activity, Task Name: $task_name, Task Description: $task_desc, Task Number: $task_number');</script>";
 }
 
-header("Location: {$_SERVER['HTTP_REFERER']}");
 
 }
 ?>

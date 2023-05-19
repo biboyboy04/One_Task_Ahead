@@ -45,6 +45,7 @@ include('../php/functions.php');
       <li>
         <a href="#">Recent</a>
         <ul>
+          <!-- Link to a specific template page -->
           <li><a href="./board.php?id=architecture">Recent 1</a></li>
           <li><a href="./board.php?id=morning-routine">Recent 2</a></li>
           <li><a href="./board.php?id=school-subjects">Recent 3</a></li>
@@ -159,7 +160,6 @@ include('../php/functions.php');
 
 
   <script>
-
 // AJAX FOR ADD TASK
 $(document).ready(function() {
   // Add event listener to todo-form-submit button
@@ -208,13 +208,13 @@ $(document).ready(function() {
           event.preventDefault();
         });
 
-      // Attach the event listeners for the new task element
-      newTaskElement.on("dragstart", () => {
-      newTaskElement.addClass("is-dragging");
-      });
-      newTaskElement.on("dragend", () => {
-        newTaskElement.removeClass("is-dragging");
-      });
+        // Attach the event listeners for the new task element
+        newTaskElement.on("dragstart", () => {
+          newTaskElement.addClass("is-dragging");
+        });
+        newTaskElement.on("dragend", () => {
+          newTaskElement.removeClass("is-dragging");
+        });
 
         // Clear the form inputs
         $('#todo-name-input').val('');
@@ -222,6 +222,9 @@ $(document).ready(function() {
 
         // Hide the modal
         $('.todo-form-container').hide();
+
+        // Scroll to the bottom
+        todoLane.scrollTop = todoLane.scrollHeight;
       },
       error: function(xhr, status, error) {
         // Handle the error if the AJAX request fails
@@ -230,6 +233,7 @@ $(document).ready(function() {
     });
   });
 });
+
 
 
 // AJAX FOR EDIT TASK
@@ -245,6 +249,8 @@ $(document).ready(function() {
     const description = $('#edit-description-input').val();
     const activity = $('#activity').val();
     const number = $('#number').val();
+    const urlParams = new URLSearchParams(window.location.search);
+    const workspaceId = urlParams.get('workspace_id') || 1;
 
     // Create an object with the form data
     const formData = {
@@ -252,7 +258,8 @@ $(document).ready(function() {
       title: title,
       description: description,
       activity: activity,
-      number: number
+      number: number,
+      workspace_id: workspaceId
     };
 
     // Send the form data to the PHP file using AJAX
