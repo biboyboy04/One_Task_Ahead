@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $task_desc = $_POST['description'];
     $task_number = $_POST['number'];
     $activity = $_POST['activity'];
+    $workspace_id = $_POST['workspace_id'];
 
     
     echo updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $task_number, 1);

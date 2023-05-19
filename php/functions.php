@@ -240,7 +240,7 @@ function addTask($conn, $temp_id, $task_name, $task_desc, $activity)
 }
 
 function deleteTask($conn, $task_id) {
-    $sql = "DELETE FROM task WHERE taskid = $task_id";
+    $sql = "DELETE FROM task WHERE task_id = $task_id";
     return mysqli_query($conn, $sql);
 }
 
@@ -270,7 +270,14 @@ function getCategoryTemplates($conn, $categ_id)
 
 function getTemplateTasks($conn, $temp_id, $lane)
 {
-    $sql = "SELECT * FROM task WHERE temp_id = $temp_id AND Lane = '$lane' ORDER BY number ASC";
+    $sql = "SELECT t.task_id, COALESCE(ct.Title, t.Title) AS Title,
+                   COALESCE(ct.Description, t.Description) AS Description,
+                   COALESCE(ct.Lane, t.Lane) AS Lane,
+                   COALESCE(ct.number, t.number) AS number
+            FROM task AS t
+            LEFT JOIN edited_template_task AS ct ON ct.task_id = t.task_id
+            WHERE t.temp_id = $temp_id AND t.Lane = '$lane'
+            ORDER BY t.number ASC";
 
     $result = mysqli_query($conn, $sql);
     return $result;
@@ -301,21 +308,23 @@ function renderTemplates($result)
 
 function renderTasks($result)
 {
-    if(!$result){return;}
+    if (!$result) {
+        return;
+    }
     if (mysqli_num_rows($result) > 0) {
         $count = 0;
-        while ($row = mysqli_fetch_assoc($result)) {      
-            echo '<div class="task" draggable="true" data-id="' . $row["taskid"] . '" data-number="' . $row["number"] . '"data-activity="' . $row["Lane"] . '">
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<div class="task" draggable="true" data-id="' . $row["task_id"] . '" data-number="' . $row["number"] . '" data-activity="' . $row["Lane"] . '">
                 <div class="task-content">
                     <h3 class="task-name">' . $row['Title'] . '</h3>
                     <p class="task-description">' . $row['Description'] . '</p>
                 </div>
                 <div class="task-buttons">
-                    <button class="edit-button" onclick="openModal(' . $row['taskid'] . ', \'' . $row['Title'] . '\', \'' . $row['Description'] . '\', \'' . $row['Lane'] . '\', \'' . $row['number'] . '\')">
+                    <button class="edit-button" onclick="openModal(' . $row['task_id'] . ', \'' . $row['Title'] . '\', \'' . $row['Description'] . '\', \'' . $row['Lane'] . '\', \'' . $row['number'] . '\')">
                         <i class="fa-solid fa-pen-to-square fa-lg" style="color: #ffffff;"></i>
                     </button>
                     <form class="delete-task-form">
-                        <input type="hidden" name="task_id" value="' . $row["taskid"] . '">
+                        <input type="hidden" name="task_id" value="' . $row["task_id"] . '">
                         <button type="button" class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
                     </form>
                 </div>
@@ -324,7 +333,6 @@ function renderTasks($result)
         }
     }
 }
-
 // function renderTasks($result)
 // {
 //     if (mysqli_num_rows($result) > 0) {
