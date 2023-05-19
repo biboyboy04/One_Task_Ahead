@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -36,9 +35,9 @@ session_start();
             <li>
                 <a href="#">Workspace</a>
                 <ul>
-                    <li><a href="#">Workspace 1</a></li>
-                    <li><a href="#">Workspace 2</a></li>
-                    <li><a href="#">Workspace 3</a></li>
+                    <li><a href="./home.php?workspace_id=1">Workspace 1</a></li>
+                    <li><a href="./home.php?workspace_id=2">Workspace 2</a></li>
+                    <li><a href="./home.php?workspace_id=3">Workspace 3</a></li>
                 </ul>
             </li>
 
@@ -74,17 +73,14 @@ session_start();
         <div class="sidebar">
             <div class="links">
                 <ul>
-                    <a href="./home.php">
+                <a href="./home.php<?php echo isset($_GET['workspace_id']) ? '?workspace_id=' . $_GET['workspace_id'] : '?workspace_id=1'; ?>">
                         <li>Home</li>
                     </a>
-                    <a href="./boards.php">
+                    <a href="./boards.php<?php echo isset($_GET['workspace_id']) ? '?workspace_id=' . $_GET['workspace_id'] : '?workspace_id=1'; ?>">
                         <li>Boards</li>
                     </a>
-                    <a href="./templates.php">
+                    <a href="./templates.php<?php echo isset($_GET['workspace_id']) ? '?workspace_id=' . $_GET['workspace_id'] : '?workspace_id=1'; ?>">
                         <li>Templates</li>
-                    </a>
-                    <a href="./categories.php">
-                        <li>Categories</li>
                     </a>
                 </ul>
             </div>

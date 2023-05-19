@@ -206,12 +206,22 @@ function emptyInputLogin($username, $password)
 //     }
 // }
 
-function updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $task_number)
+function updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $task_number, $workspace_id)
 {
+    $query = "INSERT INTO edited_template_task (workspace_id, template_id, task_id, Title, Description, Lane, number)
+              VALUES ({$workspace_id}, 0, {$task_id}, '{$task_name}', '{$task_desc}', '{$activity}', {$task_number})
+              ON DUPLICATE KEY UPDATE
+              Title = VALUES(Title),
+              Description = VALUES(Description),
+              Lane = VALUES(Lane),
+              number = VALUES(number)";
 
-$sql = "UPDATE task SET Title = '$task_name', Description = '$task_desc', Lane = '$activity', number = '$task_number' WHERE taskid = $task_id";
-    return mysqli_query($conn, $sql);
+    return mysqli_query($conn, $query);
 }
+
+
+
+
 
 function addTask($conn, $temp_id, $task_name, $task_desc, $activity)
 {
@@ -271,7 +281,7 @@ function renderCategories($result)
 {
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            echo '<a href="./category_templates.php?id=' . $row['categ_id'] . '"><div class="card">' . $row['categ_name'] . '</div></a>';
+            echo '<a href="./category_templates.php' . (isset($_GET['workspace_id']) ? '?workspace_id=' . $_GET['workspace_id'] : '?workspace_id=1') . '&id=' . $row['categ_id'] . '"><div class="card">' . $row['categ_name'] . '</div></a>';
         }
     } else {
         echo "No categories found.";
@@ -282,7 +292,7 @@ function renderTemplates($result)
 {
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            echo '<a href="./board.php?id=' . $row['template_id'] . '"><div class="card">' . $row['temp_name'] . '</div></a>';
+            echo '<a href="./board.php' . (isset($_GET['workspace_id']) ? '?workspace_id=' . $_GET['workspace_id'] : '?workspace_id=1'). '&id=' . $row['template_id'] . '"><div class="card">' . $row['temp_name'] . '</div></a>';
         }
     } else {
         echo "No categories found.";
@@ -291,6 +301,7 @@ function renderTemplates($result)
 
 function renderTasks($result)
 {
+    if(!$result){return;}
     if (mysqli_num_rows($result) > 0) {
         $count = 0;
         while ($row = mysqli_fetch_assoc($result)) {      
