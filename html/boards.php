@@ -8,14 +8,14 @@
         <i class="fa-solid fa-caret-down fa-lg" style="color: #ffffff; margin-left:5px;"></i></span>
     </p>
     <div class="container">
-      <a href="./board.php?id=architecture">
-        <div class="card" id="architecture">Architecture</div>
+      <a href="./board.php?id=6">
+        <div class="card" id="research-paper">Writing a Research Paper</div>
       </a>
-      <a href="./board.php?id=morning-routine">
-        <div class="card" id="card2">Morning Routine</div>
+      <a href="./board.php?id=19">
+        <div class="card" id="card2">Creating a Database System</div>
       </a>
-      <a href="./board.php?id=school-subjects">
-        <div class="card" id="card3">School Subjects</div>
+      <a href="./board.php?id=2">
+        <div class="card" id="card3">Graphic Design</div>
       </a>
     </div>
   </div>
