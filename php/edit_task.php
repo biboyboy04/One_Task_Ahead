@@ -5,7 +5,7 @@ include("../php/dbh.php");
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the task data from the POST request
-    // $temp_id = $_POST['temp_id'];
+    $template_id = $_POST['template_id'];
     $task_id = $_POST['task_id'];
     $task_name = $_POST['title'];
     $task_desc = $_POST['description'];
@@ -14,12 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $workspace_id = $_POST['workspace_id'];
 
     
-    echo updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $task_number, 1);
+    echo updateTemplateTask($conn, $template_id, $task_id, $task_name, $task_desc, $activity, $task_number, $workspace_id);
 
-    // Redirect back to the previous page or any other desired location
-    header("Location: {$_SERVER['HTTP_REFERER']}");
-    $response = "Data received successfully";
-    echo $response;
+    // // Redirect back to the previous page or any other desired location
+    // header("Location: {$_SERVER['HTTP_REFERER']}");
+    // $response = "Data received successfully";
+    // echo $response;
     exit();
 }
 ?>

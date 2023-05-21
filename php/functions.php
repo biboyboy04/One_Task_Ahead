@@ -206,15 +206,17 @@ function emptyInputLogin($username, $password)
 //     }
 // }
 
-function updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, $task_number, $workspace_id)
+function updateTemplateTask($conn, $template_id, $task_id, $task_name, $task_desc, $activity, $task_number, $workspace_id)
 {
     $query = "INSERT INTO edited_template_task (workspace_id, template_id, task_id, Title, Description, Lane, number)
-              VALUES ({$workspace_id}, 0, {$task_id}, '{$task_name}', '{$task_desc}', '{$activity}', {$task_number})
+              VALUES ({$workspace_id}, {$template_id}, {$task_id}, '{$task_name}', '{$task_desc}', '{$activity}', {$task_number})
               ON DUPLICATE KEY UPDATE
               Title = VALUES(Title),
               Description = VALUES(Description),
               Lane = VALUES(Lane),
-              number = VALUES(number)";
+              number = VALUES(number),
+              template_id = VALUES(template_id)";
+
 
     return mysqli_query($conn, $query);
 }
@@ -222,8 +224,7 @@ function updateTemplateTask($conn, $task_id, $task_name, $task_desc, $activity, 
 
 
 
-
-function addTask($conn, $temp_id, $task_name, $task_desc, $activity)
+function addTask($conn, $template_id, $task_name, $task_desc, $activity)
 {
     // Get the highest task number for the given activity
     $query = "SELECT MAX(number) AS max_number FROM task WHERE Lane = '$activity'";
@@ -235,7 +236,7 @@ function addTask($conn, $temp_id, $task_name, $task_desc, $activity)
     $task_number = $max_number + 1;
 
     // Insert the task into the database
-    $sql = "INSERT INTO task (Title, Description, Lane, temp_id, number) VALUES ('$task_name', '$task_desc', '$activity', '$temp_id', '$task_number')";
+    $sql = "INSERT INTO task (Title, Description, Lane, template_id, number) VALUES ('$task_name', '$task_desc', '$activity', '$template_id', '$task_number')";
     return mysqli_query($conn, $sql);
 }
 
@@ -268,15 +269,16 @@ function getCategoryTemplates($conn, $categ_id)
     return $result;
 }
 
-function getTemplateTasks($conn, $temp_id, $lane)
+function getTemplateTasks($conn, $template_id, $lane)
 {
     $sql = "SELECT t.task_id, COALESCE(ct.Title, t.Title) AS Title,
                    COALESCE(ct.Description, t.Description) AS Description,
                    COALESCE(ct.Lane, t.Lane) AS Lane,
-                   COALESCE(ct.number, t.number) AS number
+                   COALESCE(ct.number, t.number) AS number,
+                   COALESCE(ct.template_id, t.template_id) AS template_id
             FROM task AS t
             LEFT JOIN edited_template_task AS ct ON ct.task_id = t.task_id
-            WHERE t.temp_id = $temp_id AND t.Lane = '$lane'
+            WHERE t.template_id = $template_id AND t.Lane = '$lane'
             ORDER BY t.number ASC";
 
     $result = mysqli_query($conn, $sql);
@@ -320,7 +322,7 @@ function renderTasks($result)
                     <p class="task-description">' . $row['Description'] . '</p>
                 </div>
                 <div class="task-buttons">
-                    <button class="edit-button" onclick="openModal(' . $row['task_id'] . ', \'' . $row['Title'] . '\', \'' . $row['Description'] . '\', \'' . $row['Lane'] . '\', \'' . $row['number'] . '\')">
+                    <button class="edit-button" onclick="openModal(' . $row['template_id'] . ',' . $row['task_id'] . ', \'' . $row['Title'] . '\', \'' . $row['Description'] . '\', \'' . $row['Lane'] . '\', \'' . $row['number'] . '\')">
                         <i class="fa-solid fa-pen-to-square fa-lg" style="color: #ffffff;"></i>
                     </button>
                     <form class="delete-task-form">

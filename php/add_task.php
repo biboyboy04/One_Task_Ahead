@@ -6,17 +6,17 @@ include("../php/dbh.php");
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the task data from the POST request
-    $temp_id = $_POST['temp_id'];
+    $template_id = $_POST['template_id'];
     $task_name = $_POST['name'];
     $task_desc = $_POST['description'];
     $activity = "todo";
 
     // Add the task to the database
-    $task_id = addTask($conn, $temp_id, $task_name, $task_desc, $activity);
+    $task_id = addTask($conn, $template_id, $task_name, $task_desc, $activity);
 
     if ($task_id) {
         // Retrieve the newly created task
-        $sql = "SELECT * FROM task ORDER BY taskid DESC LIMIT 1";
+        $sql = "SELECT * FROM task ORDER BY task_id DESC LIMIT 1";
         $result = mysqli_query($conn, $sql);
 
         if ($result && mysqli_num_rows($result) > 0) {
