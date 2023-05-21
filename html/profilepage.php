@@ -107,7 +107,7 @@ $_SESSION['username'] = $userInfo['username'];
                 <h2>Edit Profile</h2>
             </div>
             <div class="modal-body">
-                <form action="" method="post" >
+                <form action="" method="post" onsubmit="event.preventDefault(); confirmEdit().then(() => this.submit())">
                     <div class="contents">
                         <label>First Name:</label>
                         <input type="text" name="firstname" value="<?php echo $userInfo['first_name']?>" />
@@ -162,3 +162,37 @@ $_SESSION['username'] = $userInfo['username'];
 
 </html>
 <script src="../scripts/profilemodal.js"></script>
+
+
+<!-- experiment with form validation in edit profile -->
+<script>
+    function confirmEdit() {
+        return new Promise((resolve, reject) => {
+           
+            var firstname = document.querySelector('.error.firstname-error').textContent;
+            var lastname = document.querySelector('.error.lastname-error').textContent;
+            var username = document.querySelector('.error.username-error').textContent;
+            var email = document.querySelector('.error.email-error').textContent;
+
+            if (firstname.trim() === null) {
+                reject();
+            }
+
+            if (lastname.trim() === null) {
+                reject();
+            }
+
+            if (username.trim() === null) {
+                reject();
+            }
+
+            if (email.trim() === null) {
+                reject();
+            }
+                // Otherwise, the user clicked ok, so resolve the promise to allow the form to be submitted
+            else {
+                resolve();
+            }
+        });
+    }
+</script>

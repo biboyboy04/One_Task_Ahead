@@ -31,27 +31,25 @@ include "includes/functions.php";
 
 
         <div class="items">
-            <li><i class="fa-solid fa-users"></i><a href="Admin.php">User Management</a></li>
-            <li><i class="fa-solid fa-list"></i><a href="temp.php">Template Management</a></li>
+        <a href="Admin.php"><li class="active"><i class="fa-solid fa-users"></i>User Management</li></a>
+        <a href="temp.php"> <li><i class="fa-solid fa-list"></i>Template Management</li></a>
             <!-- <li><i class="fa-solid fa-calendar-days"></i><a href=""></a></li>
             <li><i class="fa-regular fa-credit-card"></i><a href="#">Transactions</a></li> -->
-            <li><i class="fa-sharp fa-solid fa-right-from-bracket"></i><a href="../php/logout.inc.php">Logout</a></li>
+        <a href="../php/logout.inc.php"><li><i class="fa-sharp fa-solid fa-right-from-bracket"></i>Logout</li></a>
 
         </div>
     </section>
 
     <section id="interface">
         <div class="navigation">
-            <div class="n1">
-
-            </div>
+        <h3 class="i-name"> User Accounts </h3>
 
             <div class="profile">
                 <p><?php echo $_SESSION['username'] ?></p>
                 <img src="img/admin.png" alt="">
             </div>
         </div>
-        <h3 class="i-name"> User Accounts </h3>
+       
         <div class="values">
             <div class="val-box"> <h3> <?php echo totalUsers($conn); ?></h3>
                 <i class="fas fa-users"></i>
@@ -62,7 +60,7 @@ include "includes/functions.php";
                
             </div>
 
-            <div class="val-box">
+            <div class="val-box" id="addtemp">
                 <p>Add User</p>
             </div>
         </div>

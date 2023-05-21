@@ -58,3 +58,17 @@ button {
     display: flex;
     margin-left:auto;
 }
+.buttons #edit {
+  background-color:#7faa75;
+  border: none ;
+  border-radius: .3rem;
+  width: min-content;
+  color: white;
+  padding: 4px 31px;
+  transition: 0.3s;
+  font-weight: 500;
+}
+.buttons #edit:hover{
+  background-color:#617f5a;
+  color: white;
+}

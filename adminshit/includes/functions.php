@@ -14,8 +14,8 @@ function displayUsers($conn)
         echo "<td> " . $user['username'] . "</td> ";
         echo "<td> " . $user['email'] . "</td> ";
         echo "<td> " . $user['role'] . "</td> ";
-        echo "<td> <button>Edit</button></td>";
-        echo "<td> <button> Delete </button></td>";
+        echo "<td class='edit'> <button>Edit</button></td>";
+        echo "<td class='delete'> <button> Delete </button></td>";
         echo "</tr>";
     }
 }
@@ -48,10 +48,16 @@ function displaytemps($conn)
         echo "<td> " . $template['temp_name'] . "</td> ";
         echo "<td> " . $template['categ_name'] . "</td> ";
         echo "<td> " . $template['task_count'] . "</td> ";
-        echo "<td> <button>Edit</button></td>";
-        echo "<td> <button> Delete </button></td>";
+        echo "<td class='edit'> <button>Edit</button></td>";
+        echo "<td  class='delete'> <button> Delete </button></td>";
         echo "</tr>";
     }
 }
 
+function totaltemps($conn) {
+    $sql = "SELECT * FROM template;";
+    $result = mysqli_query($conn, $sql);
+    $count  = mysqli_num_rows($result);
+    return $count;
 
+}

@@ -55,10 +55,9 @@ body {
   cursor: pointer;
 }
 
-#menu .items li:nth-child(1) {
-  border-left: 4px solid rgb(11, 65, 11);
-}
-
+#menu .items li.active {
+	border-left: 4px solid rgb(11, 65, 11);
+  }
 #menu .items li i {
   color: rgb(255, 255, 255);
   width: 30px;
@@ -73,7 +72,7 @@ body {
   color: var(--orange);
 }
 
-#menu .items li a {
+#menu .items a {
   text-decoration: none;
   color: rgb(255, 255, 255);
   font-weight: 300px;
@@ -133,21 +132,20 @@ body {
 }
 
 .i-name {
-  color: #444a53;
-  padding: 30px 30px 0 30px;
+  color: white;
   font-size: 24px;
   font-weight: 700;
-  margin-top: 70px;
 }
 .values {
   padding: 30px 30px 0 30px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  margin-top: 60px;
 }
 .values .val-box {
   background: #fff;
-  width: 275px;
+  width: max-content;
   padding: 16px 25px;
   border-radius: 5px;
   margin-left: 2rem;
@@ -223,10 +221,12 @@ thead td {
   background: #f9fafb;
   text-align: start;
   padding: 15px;
+  text-align: center;
 }
 
 tbody tr td {
   padding: 10px 15px;
+  text-align: center;
 }
 
 .active p {
@@ -255,4 +255,48 @@ tbody tr td {
   font-size: 14px;
   color: #554cd1;
   font-weight: 600;
+}
+
+
+.profile p{
+  color:white;
+  margin-right: .5rem;
+  width: min-content;
+  font-weight:500;
+  letter-spacing: 1px;
+}
+.values #addtemp{
+  width: max-content;
+  transition: 0.3s;
+}
+.values #addtemp:hover{
+  background-color:#334533 ;
+  color: white;
+}
+
+tbody tr .edit button{
+  background-color:rgb(98, 179, 246);
+  border: none ;
+  border-radius: .3rem;
+  width: min-content;
+  color: white;
+  padding: 4px 11px;
+  transition: 0.3s;
+}
+tbody tr .edit button:hover{
+  background-color:rgb(11, 60, 100);
+  color: white;
+}
+tbody tr .delete button{
+  background-color:rgb(243, 55, 55);
+  border: none ;
+  border-radius: .3rem;
+  width: min-content;
+  color: white;
+  padding: 4px 11px;
+  transition: 0.3s;
+}
+tbody tr .delete button:hover{
+  background-color:rgb(191, 38, 38);
+  color: white;
 }
