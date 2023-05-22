@@ -1,6 +1,5 @@
-<?php include('../php/header.php') ?>
-<?php include('../php/dbh.php') ?>
-<?php include('../php/functions.php') ?>
+<?php include('./header.php') ?>
+
 <!-- content -->
 <div class="content">
   <div class="categories-featured">

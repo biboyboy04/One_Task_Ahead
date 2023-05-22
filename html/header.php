@@ -1,5 +1,7 @@
 <?php
 session_start();
+include('../php/dbh.php');
+include('../php/functions.php');
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +51,33 @@ session_start();
                     <li><a href="./board.php?id=school-subjects">Recent 3</a></li>
                 </ul>
             </li>
-            <li id="create-btn"><a href="./board.php">Create</a></li>
+            <li id="create-btn"><a>Create</a></li>
+            <script>
+                document.getElementById("create-btn").addEventListener("click", function(event) {
+                    event.preventDefault();
+
+                    // Get the workspace ID from the URL query parameter
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const workspaceId = urlParams.get('workspace_id') || 1;
+
+                    // Create a hidden form with the workspace ID
+                    const form = document.createElement("form");
+                    form.method = "POST";
+                    form.action = "../php/create-board.php";
+
+                    const workspaceIdInput = document.createElement("input");
+                    workspaceIdInput.type = "hidden";
+                    workspaceIdInput.name = "workspace_id";
+                    workspaceIdInput.value = workspaceId;
+
+                    form.appendChild(workspaceIdInput);
+
+                    // Append the form to the document and submit it
+                    document.body.appendChild(form);
+                    form.submit();
+                });
+            </script>
+
             <!--SIgn up and login button-->
             <div class="ppic">
                 <?php

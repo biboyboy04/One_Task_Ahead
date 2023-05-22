@@ -1,4 +1,4 @@
-<?php include('../php/header.php') ?>
+<?php include('./header.php') ?>
 <!-- content -->
 <div class="content">
     <div class="schedule">

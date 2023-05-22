@@ -245,7 +245,19 @@ function deleteTask($conn, $task_id) {
     return mysqli_query($conn, $sql);
 }
 
+function createBoard($conn, $workspace_id, $boardName) {
+    $sql = "INSERT INTO board (workspace_id, BoardName) VALUES ('$workspace_id', '$boardName')";
 
+    return mysqli_query($conn, $sql);
+}
+
+function getHighestBoardId($conn) {
+    $sql = "SELECT MAX(board_id) AS highest_id FROM board";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $highestId = $row['highest_id'];
+    return $highestId;
+}
 
 
 function getTableRowById($conn, $table, $table_id, $id)

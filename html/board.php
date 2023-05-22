@@ -1,6 +1,6 @@
 <?php
-include('../php/dbh.php');
-include('../php/functions.php');
+// include('../php/dbh.php');
+// include('../php/functions.php');
 ?>
 
 <!DOCTYPE html>
