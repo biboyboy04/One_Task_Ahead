@@ -14,7 +14,7 @@ function displayUsers($conn)
         echo "<td> " . $user['username'] . "</td> ";
         echo "<td> " . $user['email'] . "</td> ";
         echo "<td> " . $user['role'] . "</td> ";
-        echo "<td class='edit'> <button>Edit</button></td>";
+        echo "<td class='edit'> <button onclick='openEditModal()'>Edit</button></td>";
         echo "<td class='delete'> <button> Delete </button></td>";
         echo "</tr>";
     }

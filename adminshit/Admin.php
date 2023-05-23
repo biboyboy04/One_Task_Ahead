@@ -76,13 +76,56 @@ include "includes/functions.php";
         <div id="myModal" class="modal">
             <!-- Modal content -->
             <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2>Modal Title</h2>
-                <p>This is a simple modal dialog.</p>
-                <p>You can add your content here.</p>
+                <div class="modal-header">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Add User</h2>
+                </div>
+                <div class="class= modal-body">
+                    <form action="" method="post">
+                        <label for="firstname">Firstname:</label>
+                        <input type="text" name="firstname">
+                        <label for="lastname">Lastname:</label>
+                        <input type="text" name="lastname">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password">
+                        <label for="retypepassword">Retype Password:</label>
+                        <input type="password" name="retypepassword">     
+                    </form>
+                    <button type="submit" name="submit">Save</button>
+                </div>             
+                
             </div>
         </div>
 
+<!-- The modal -->
+    <div id="editModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close" onclick="closeEditModal()">&times;</span>
+                    <h2>Edit User</h2>
+                </div>
+                <div class="class= modal-body">
+                    <form action="" method="post">
+                        <label for="firstname">Firstname:</label>
+                        <input type="text" name="firstname">
+                        <label for="lastname">Lastname:</label>
+                        <input type="text" name="lastname">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email">
+                         
+                    </form>
+                    <button type="submit" name="submit">Save</button>
+                </div>             
+                
+            </div>
+        </div>
 
         <div class="board">
             <table width="100%">
@@ -112,6 +155,7 @@ include "includes/functions.php";
 </body>
 
 </html>
+
 <script>
     // JavaScript functions to open and close the modal
     function openModal() {
@@ -121,4 +165,13 @@ include "includes/functions.php";
     function closeModal() {
         document.getElementById('myModal').style.display = 'none';
     }
+
+    function openEditModal() {
+        document.getElementById('editModal').style.display = 'block';
+    }
+
+    function closeEditModal() {
+        document.getElementById('editModal').style.display = 'none';
+    }
+
 </script>
