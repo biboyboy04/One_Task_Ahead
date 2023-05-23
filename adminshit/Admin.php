@@ -2,6 +2,7 @@
 session_start();
 include "../php/dbh.php";
 include "includes/functions.php";
+include "includes/adduser.inc.php";
 ?>
 
 
@@ -18,6 +19,52 @@ include "includes/functions.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="modal.css">
+
+    <?php
+    if ($firstname_error != null) {
+    ?> <style>
+            .firstname-error {
+                display: block
+            }
+        </style> <?php
+                }
+                if ($lastname_error != null) {
+                    ?> <style>
+            .lastname-error {
+                display: block
+            }
+        </style> <?php
+                }
+                if ($username_error != null) {
+                    ?> <style>
+            .username-error {
+                display: block
+            }
+        </style> <?php
+                }
+                if ($email_error != null) {
+                    ?> <style>
+            .email-error {
+                display: block
+            }
+        </style> <?php
+                }
+                if ($password_error != null) {
+                    ?> <style>
+            .password-error {
+                display: block
+            }
+        </style> <?php
+                }
+                if ($retypepassword_error != null) {
+                    ?> <style>
+            .rptpassword-error {
+                display: block
+            }
+        </style> <?php
+                }
+                    ?>
+
 </head>
 
 <body>
@@ -82,20 +129,40 @@ include "includes/functions.php";
                 </div>
                 <div class="class= modal-body">
                     <form action="" method="post">
-                        <label for="firstname">Firstname:</label>
-                        <input type="text" name="firstname">
-                        <label for="lastname">Lastname:</label>
-                        <input type="text" name="lastname">
+                        <label for="fname">Firstname:</label>
+                        <input type="text" name="fname">
+                        <p class="error firstname-error">
+                            <?php echo $firstname_error ?>
+                        </p>
+                       
+                        <label for="lname">Lastname:</label>
+                        <input type="text" name="lname">
+                        <p class="error lastname-error">
+                        <?php echo $lastname_error ?>
+                        </p>
                         <label for="username">Username:</label>
                         <input type="text" name="username">
+                        <p class="error username-error">
+                        <?php echo $username_error ?>
+                        </p>
                         <label for="email">Email:</label>
                         <input type="text" name="email">
+                        <p class="error email-error">
+                        <?php echo $email_error ?>
+                        </p>
                         <label for="password">Password:</label>
-                        <input type="password" name="password">
-                        <label for="retypepassword">Retype Password:</label>
-                        <input type="password" name="retypepassword">     
+                        <input type="password" name="password" value="">
+                        <p class="error password-error">
+                        <?php echo $password_error ?>
+                        </p>
+                        <label for="repeat-password">Retype Password:</label>
+                        <input type="password" name="repeat-password">
+                        <p class="error rptpassword-error">
+                        <?php echo $retypepassword_error ?>
+                        </p>   
+                        <button type="submit" name="submit">Save</button>  
                     </form>
-                    <button type="submit" name="submit">Save</button>
+                   
                 </div>             
                 
             </div>
@@ -121,7 +188,7 @@ include "includes/functions.php";
                         <input type="text" name="email">
                          
                     </form>
-                    <button type="submit" name="submit">Save</button>
+                    <button type="submit" name="save">Save</button>
                 </div>             
                 
             </div>
