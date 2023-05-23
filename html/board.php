@@ -1,6 +1,6 @@
 <?php
-// include('../php/dbh.php');
-// include('../php/functions.php');
+include('../php/dbh.php');
+include('../php/functions.php');
 ?>
 
 <!DOCTYPE html>
@@ -36,22 +36,46 @@
       <li>
         <a href="#">Workspace</a>
         <ul>
-          <li><a href="#">Workspace 1</a></li>
-          <li><a href="#">Workspace 2</a></li>
-          <li><a href="#">Workspace 3</a></li>
+            <li><a href="./home.php?workspace_id=1">Workspace 1</a></li>
+            <li><a href="./home.php?workspace_id=2">Workspace 2</a></li>
+            <li><a href="./home.php?workspace_id=3">Workspace 3</a></li>
         </ul>
       </li>
 
       <li>
-        <a href="#">Recent</a>
-        <ul>
-          <!-- Link to a specific template page -->
-          <li><a href="./board.php?id=architecture">Recent 1</a></li>
-          <li><a href="./board.php?id=morning-routine">Recent 2</a></li>
-          <li><a href="./board.php?id=school-subjects">Recent 3</a></li>
-        </ul>
+          <a href="#">Recent</a>
+          <ul>
+              <li><a href="./board.php?id=architecture">Recent 1</a></li>
+              <li><a href="./board.php?id=morning-routine">Recent 2</a></li>
+              <li><a href="./board.php?id=school-subjects">Recent 3</a></li>
+          </ul>
       </li>
-      <li id="create-btn"><a href="./board.php">Create</a></li>
+      <li id="create-btn"><a>Create</a></li>
+            <script>
+                document.getElementById("create-btn").addEventListener("click", function(event) {
+                    event.preventDefault();
+
+                    // Get the workspace ID from the URL query parameter
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const workspaceId = urlParams.get('workspace_id') || 1;
+
+                    // Create a hidden form with the workspace ID
+                    const form = document.createElement("form");
+                    form.method = "POST";
+                    form.action = "../php/create-board.php";
+
+                    const workspaceIdInput = document.createElement("input");
+                    workspaceIdInput.type = "hidden";
+                    workspaceIdInput.name = "workspace_id";
+                    workspaceIdInput.value = workspaceId;
+
+                    form.appendChild(workspaceIdInput);
+
+                    // Append the form to the document and submit it
+                    document.body.appendChild(form);
+                    form.submit();
+                });
+            </script>
       <!--SIgn up and login button-->
       <div class="ppic">
         <?php
@@ -101,20 +125,20 @@
     </div>
     <div class="todo-form-container">
         <?php
-        $template_id = isset($_GET["id"]) ? $_GET["id"] : null;
-        ?>
+        $id = isset($_GET["id"]) ? $_GET["id"] : (isset($_GET["board_id"]) ? $_GET["board_id"] : null);
+?>
         <form id="todo-form">
             <h2>Create a new task</h2>
             <input name="name" type="text" placeholder="New TODO name..." id="todo-name-input" />
             <textarea name="description" id="todo-description-input" cols="30" rows="10" placeholder="New TODO description..."></textarea>
-            <input type="hidden" name="template_id" value="<?php echo $template_id; ?>">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
             <button id="todo-form-submit" type="submit">Add +</button>
         </form>
     </div>
 
     <div class="edit-form-container">
         <?php
-        $template_id = isset($_GET["id"]) ? $_GET["id"] : null;
+        $temp_id = isset($_GET["id"]) ? $_GET["id"] : null;
         ?>
         <form id="edit-form">
             <h2>Edit Task</h2>
@@ -123,7 +147,7 @@
             <input id = "task_id" type="hidden" name="task_id" value="">
             <input id = "activity" type="hidden" name="activity" value="">
             <input id = "number" type="hidden" name="number" value="">
-            <input id = "template_id" type="hidden" name="template_id" value="<?php echo $template_id; ?>">
+            <input type="hidden" name="temp_id" value="<?php echo $temp_id; ?>">
             <button id="edit-form-submit" type="submit">Edit</button>
         </form>
     </div>
@@ -133,9 +157,11 @@
       <div class="swim-lane" id="todo-lane" draggable="true" data-activity="todo">
         <h3 class="heading">TODO</h3>
         <?php
-        $template_id = isset($_GET["id"]) ? $_GET["id"] : null;
-        $template = getTemplateTasks($conn, $template_id, "todo");
-        renderTasks($template);
+          if($temp_id = isset($_GET["id"]) ? $_GET["id"] : null)  {
+            $template = getTemplateTasks($conn, $temp_id, "todo");
+            renderTasks($template);
+          }
+
         ?>
         <button id="todo-submit" type="submit">Add +</button>
       </div>
@@ -143,16 +169,21 @@
       <div class="swim-lane" id="doing-lane" draggable="true" data-activity="doing">
         <h3 class="heading">Doing</h3>
         <?php
-        $template = getTemplateTasks($conn, $template_id, "doing");
-        renderTasks($template);
+         if($temp_id){
+          $template = getTemplateTasks($conn, $temp_id, "doing");
+          renderTasks($template);
+         }
+
         ?>
       </div>
 
       <div class="swim-lane" id="done-lane" draggable="true" data-activity="done">
         <h3 class="heading">Done</h3>
         <?php
-        $template = getTemplateTasks($conn, $template_id, "done");
-        renderTasks($template);
+            if($temp_id){
+            $template = getTemplateTasks($conn, $temp_id, "done");
+            renderTasks($template);
+            }
         ?>
       </div>
     </div>
@@ -169,21 +200,33 @@ $(document).ready(function() {
     // Get the form data
     const name = $('#todo-name-input').val();
     const description = $('#todo-description-input').val();
-    const template_id = $('input[name="template_id"]').val();
+    const id = $('input[name="id"]').val();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlIdTemplate = urlParams.get('id');
+    const urlIdBoard = urlParams.get('board_id');
+    let url;
+
+    if (urlIdTemplate) {
+      url = '../php/add_task.php';
+    } else if (urlIdBoard) {
+      url = '../php/add_board_task.php';
+    }
 
     // Send the AJAX request
     $.ajax({
       type: 'POST',
-      url: '../php/add_task.php',
+      url: url,
       data: {
         name: name,
         description: description,
-        template_id: template_id
+        id: id
       },
       success: function(response) {
         // Append the new task HTML to the swim lane
+        console.log(response);
         const newTask = `
-          <div class="task" draggable="true" data-id="${response.taskid}" data-number="${response.number}" data-activity="${response.lane}">
+          <div class ="task" draggable="true" data-id="${response.taskid}" data-number="${response.number}" data-activity="${response.lane}">
             <div class="task-content">
               <h3 class="task-name">${response.title}</h3>
               <p class="task-description">${response.description}</p>
@@ -244,7 +287,6 @@ $(document).ready(function() {
     event.preventDefault(); // Prevent the default form submission behavior
 
     // Get the task ID and other form data
-   
     const taskId = $('#task_id').val();
     const title = $('#edit-name-input').val();
     const description = $('#edit-description-input').val();
@@ -252,10 +294,9 @@ $(document).ready(function() {
     const number = $('#number').val();
     const urlParams = new URLSearchParams(window.location.search);
     const workspaceId = urlParams.get('workspace_id') || 1;
-    const tempId = urlParams.get('id') || 1;
+
     // Create an object with the form data
     const formData = {
-      template_id: tempId,
       task_id: taskId,
       title: title,
       description: description,
@@ -339,28 +380,23 @@ $(document).ready(function() {
     // Get the task data from the current task element
     const $taskElement = $(this).closest('.task');
     const taskId = $taskElement.data('id');
-    const urlParams = new URLSearchParams(window.location.search);
-    const tempId = urlParams.get('id');
     const title = $taskElement.find('.task-name').text();
     const description = $taskElement.find('.task-description').text();
     const activity = $taskElement.data('activity');
     const number = $taskElement.data('number');
 
     // Call openModal to populate the modal fields
-    openModal(tempId, taskId, title, description, activity, number);
+    openModal(taskId, title, description, activity, number);
   });
 });
 
-function openModal(tempId, taskId, title, description, activity, number) {
+function openModal(taskId, title, description, activity, number) {
   // Get the modal element
   const modalContainerEdit = document.querySelector(".edit-form-container");
 
   // Set the task ID in the modal
   const taskInput = document.getElementById("task_id");
   taskInput.value = taskId;
-
-  const templateId = document.getElementById("template_id");
-  templateId.value = tempId;
 
   // Set other values in the modal
   document.getElementById("edit-name-input").value = title;

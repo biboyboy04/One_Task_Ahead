@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       // Board created successfully
       $highestBoardId = getHighestBoardId($conn);
 
-      header("Location: ../html/board.php?workspace_id=$workspaceId&id=$highestBoardId");
+      header("Location: ../html/board.php?workspace_id=$workspaceId&board_id=$highestBoardId");
     } else {
       // Failed to create board
       echo "Failed to create board.";

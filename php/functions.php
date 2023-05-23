@@ -227,7 +227,7 @@ function updateTemplateTask($conn, $template_id, $task_id, $task_name, $task_des
 function addTask($conn, $template_id, $task_name, $task_desc, $activity)
 {
     // Get the highest task number for the given activity
-    $query = "SELECT MAX(number) AS max_number FROM task WHERE Lane = '$activity'";
+    $query = "SELECT MAX(number) AS max_number FROM template_task WHERE Lane = '$activity'";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
     $max_number = $row['max_number'];
@@ -236,12 +236,28 @@ function addTask($conn, $template_id, $task_name, $task_desc, $activity)
     $task_number = $max_number + 1;
 
     // Insert the task into the database
-    $sql = "INSERT INTO task (Title, Description, Lane, template_id, number) VALUES ('$task_name', '$task_desc', '$activity', '$template_id', '$task_number')";
+    $sql = "INSERT INTO template_task (Title, Description, Lane, template_id, number) VALUES ('$task_name', '$task_desc', '$activity', '$template_id', '$task_number')";
+    return mysqli_query($conn, $sql);
+}
+
+function addBoardTask($conn, $board_id, $task_name, $task_desc, $activity)
+{
+    // Get the highest task number for the given activity
+    $query = "SELECT MAX(number) AS max_number FROM board_task WHERE Lane = '$activity'";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    $max_number = $row['max_number'];
+
+    // Increment the task number by 1
+    $task_number = $max_number + 1;
+
+    // Insert the task into the database
+    $sql = "INSERT INTO board_task (Title, Description, Lane, board_id, number) VALUES ('$task_name', '$task_desc', '$activity', '$board_id', '$task_number')";
     return mysqli_query($conn, $sql);
 }
 
 function deleteTask($conn, $task_id) {
-    $sql = "DELETE FROM task WHERE task_id = $task_id";
+    $sql = "DELETE FROM template_task WHERE task_id = $task_id";
     return mysqli_query($conn, $sql);
 }
 
@@ -288,11 +304,10 @@ function getTemplateTasks($conn, $template_id, $lane)
                    COALESCE(ct.Lane, t.Lane) AS Lane,
                    COALESCE(ct.number, t.number) AS number,
                    COALESCE(ct.template_id, t.template_id) AS template_id
-            FROM task AS t
+            FROM template_task AS t
             LEFT JOIN edited_template_task AS ct ON ct.task_id = t.task_id
             WHERE t.template_id = $template_id AND t.Lane = '$lane'
             ORDER BY t.number ASC";
-
     $result = mysqli_query($conn, $sql);
     return $result;
 }
