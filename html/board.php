@@ -102,8 +102,10 @@ include('../php/functions.php');
         $id = strtoupper($id); // Convert to uppercase
         $id = str_replace('-', ' ', $id); // Replace "-" with spaces
         echo $id; // Output: ARCHITECTURE
+        echo '<i id="board-name-edit" class="fa-solid fa-pen-to-square fa-lg"></i>';
       } else {
         echo "New Task";
+        echo '<i id="board-name-edit" class="fa-solid fa-pen-to-square fa-xs"></i>';
       }
       ?>
 
@@ -123,6 +125,19 @@ include('../php/functions.php');
         <button id="reset">Reset</button>
       </div>
     </div>
+
+    <div class="board-form-container" id="board">
+    <?php
+        $board_id =isset($_GET["board_id"]) ? $_GET["board_id"] : null;
+?>
+  <form id="board-form">
+    <h2>Edit board name</h2>
+    <input name="name" type="text" placeholder="New board name..." id="board-name-input" />
+    <input type="hidden" name="id" value="<?php echo $board_id; ?>">
+    <button id="board-form-submit" type="submit">Submit</button>
+  </form>
+</div>
+
     <div class="todo-form-container">
         <?php
         $id = isset($_GET["id"]) ? $_GET["id"] : (isset($_GET["board_id"]) ? $_GET["board_id"] : null);
@@ -203,6 +218,40 @@ include('../php/functions.php');
 
 
   <script>
+    
+function openBoardModal() {
+    // Get the modal element
+    var modal = document.getElementById("board");
+    
+    // Show the modal
+    modal.style.display = "block";
+  }
+
+  // Get the board-name-edit element
+  var boardNameEdit = document.getElementById("board-name-edit");
+  
+  // Add onclick event and call the openModal function
+  boardNameEdit.onclick = openBoardModal;
+
+
+const boardModalContainerEdit = document.querySelector(".board-form-container");
+const closeBoardModal = () => {
+  boardModalContainerEdit.style.display = "none";
+  document.body.classList.remove("modal-open");
+};
+const showBoardModal = () => {
+  boardModalContainerEdit.style.display = "block";
+  document.body.classList.add("modal-open");
+};
+
+boardModalContainerEdit.addEventListener("click", (e) => {
+  if (e.target === boardModalContainerEdit) {
+    closeBoardModal();
+  }
+});
+
+
+
 // AJAX FOR ADD TASK
 $(document).ready(function() {
   // Add event listener to todo-form-submit button
@@ -288,6 +337,64 @@ $(document).ready(function() {
     });
   });
 });
+
+
+// AJAX FOR EDIT TASK
+
+$(document).ready(function() {
+  // Submit the form when the Edit button is clicked
+  $('#board-form-submit').click(function(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    // Get the task ID and other form data
+    const title = $('#board-name-input').val();
+  
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlIdBoard = urlParams.get('board_id');
+    let url = '../php/edit_board_name.php';
+
+    // if (urlIdTemplate) {
+    //   url = '../php/edit_task.php';
+    // } else if (urlIdBoard) {
+    //   url = '../php/edit_board_task.php';
+    // }
+
+    // Create an object with the form data
+    const formData = {
+      title: title,
+      board_id: urlIdBoard
+    };
+
+    // Send the form data to the PHP file using AJAX
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: formData,
+      success: function(response) {
+        // Handle the response from the PHP file if needed
+        const boardName = document.querySelector("#project-name");
+        boardName.textContent = title;
+        console.log(response);
+
+        // Hide the edit form container
+        $('.board-form-container').hide();
+      },
+      error: function(xhr, status, error) {
+        // Handle errors if any
+        console.error(error);
+      }
+    });
+  });
+
+  // Hide the edit form container when the modal is closed
+  $('.board-form-container').on('click', function(event) {
+    if ($(event.target).hasClass('board-form-container')) {
+      $(this).hide();
+    }
+  });
+});
+
 
 
 

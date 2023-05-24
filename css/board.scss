@@ -323,3 +323,12 @@ body {
     text-align: center;
   }
 }
+
+
+#board-name-edit {
+  margin-left: 1rem;
+}
+
+#board-name-edit:hover {
+  color: red; /* Change the color to red when hovered */
+}

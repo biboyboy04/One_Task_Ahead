@@ -315,6 +315,12 @@ function getBoards($conn, $workspace_id)
     return $result;
 }
 
+function editBoardName($conn, $board_id, $board_name){
+    $sql = "UPDATE board SET BoardName = '" . $board_name . "' WHERE board_id = " . $board_id;
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
 
 function getCategoryTemplates($conn, $categ_id)
 {
