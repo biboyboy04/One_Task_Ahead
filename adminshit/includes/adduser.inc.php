@@ -59,11 +59,9 @@ if (isset($_POST['submit'])) {
         $username_error = $username_return_error;
     }
 
-    if (!empty($firstname_error) || !empty($lastname_error) || !empty($username_error) || !empty($email_error) || !empty($password_error) || !empty($retypepassword_error)) {
-        echo '<script>openModal();</script>';
-    }
-    
-    if ($firstname_error === null && $lastname_error === null && $username_error === null && $email_error === null && $password_error === null && $retypepassword_error === null) {
+    if ($firstname_error === "" && $lastname_error === "" && $username_error === "" && $email_error === "" && $password_error === "" && $retypepassword_error === "") {
         createUser($conn, $firstname, $lastname, $email, $username, $password);
-    }
+
+
+    } 
 }

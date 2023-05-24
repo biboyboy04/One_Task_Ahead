@@ -122,9 +122,15 @@ function createUser($conn, $firstname, $lastname, $email, $username, $password)
     mysqli_stmt_bind_param($statement, "sssss", $firstname, $lastname, $username, $email, $hashedpass);
     mysqli_stmt_execute($statement);
     mysqli_stmt_close($statement);
-    header("location: ../html/signup.php?error=success");
-    exit();
-
+    unset($_POST);
+    if($_SESSION['accesstype'] == 0){
+        header("location: ../html/signup.php?error=success");
+        exit();
+    }
+    if($_SESSION['accesstype'] == 1){
+        header("location: ../adminshit/Admin.php?error=success");
+        exit();
+    }
 }
 
 
@@ -477,6 +483,7 @@ function loginUser($conn, $username, $password)
             session_start();
             $_SESSION["id"] = $usernameExists["id"];
             $_SESSION["username"] = $usernameExists["username"];
+            $_SESSION["accesstype"] = $usernameExists["access_lvl"];
             header("location: ../adminshit/Admin.php"); //temporary testing.. Default is the home page
             exit();
         }
