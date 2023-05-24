@@ -65,6 +65,7 @@ include "includes/adduser.inc.php";
                 }
                     ?>
 
+
 </head>
 
 <body>
@@ -130,33 +131,33 @@ include "includes/adduser.inc.php";
                 <div class="class= modal-body">
                     <form action="" method="post">
                         <label for="fname">Firstname:</label>
-                        <input type="text" name="fname">
+                        <input type="text" name="fname" value="<?php if(!empty($firstname)){echo $firstname;} else {echo null;}?>">
                         <p class="error firstname-error">
                             <?php echo $firstname_error ?>
                         </p>
                        
                         <label for="lname">Lastname:</label>
-                        <input type="text" name="lname">
+                        <input type="text" name="lname" value="<?php if(!empty($lastname)){echo $lastname;} else {echo null;}?>">
                         <p class="error lastname-error">
                         <?php echo $lastname_error ?>
                         </p>
                         <label for="username">Username:</label>
-                        <input type="text" name="username">
+                        <input type="text" name="username" value="<?php if(!empty($username)){echo $username;} else {echo null;}?>">
                         <p class="error username-error">
                         <?php echo $username_error ?>
                         </p>
                         <label for="email">Email:</label>
-                        <input type="text" name="email">
+                        <input type="text" name="email" value="<?php if(!empty($email)){echo $email;} else {echo null;}?>">
                         <p class="error email-error">
                         <?php echo $email_error ?>
                         </p>
                         <label for="password">Password:</label>
-                        <input type="password" name="password" value="">
+                        <input type="password" name="password" value="<?php if(!empty($password)){echo $password;} else {echo null;}?>">
                         <p class="error password-error">
                         <?php echo $password_error ?>
                         </p>
                         <label for="repeat-password">Retype Password:</label>
-                        <input type="password" name="repeat-password">
+                        <input type="password" name="repeat-password" value="<?php if(!empty($retypepassword)){echo $retypepassword;} else {echo null;}?>">
                         <p class="error rptpassword-error">
                         <?php echo $retypepassword_error ?>
                         </p>   
@@ -167,6 +168,12 @@ include "includes/adduser.inc.php";
                 
             </div>
         </div>
+        <!-- for modal add -->
+<?php
+    if(isset($_POST['submit'])){
+        echo "<script>document.getElementById('myModal').style.display = 'block';</script>";
+    }
+?>
 
 <!-- The modal -->
     <div id="editModal" class="modal">
