@@ -221,7 +221,19 @@ function updateTemplateTask($conn, $template_id, $task_id, $task_name, $task_des
     return mysqli_query($conn, $query);
 }
 
+function updateBoardTask($conn, $board_task_id, $task_name, $task_desc, $activity, $task_number)
+{
+    $query = "UPDATE board_task 
+              SET Title = '{$task_name}', Description = '{$task_desc}', Lane = '{$activity}', number = {$task_number}
+              WHERE board_task_id = $board_task_id";
 
+    return mysqli_query($conn, $query);
+}
+
+function deleteBoardTask($conn, $task_id) {
+    $sql = "DELETE FROM board_task WHERE board_task_id = $task_id";
+    return mysqli_query($conn, $sql);
+}
 
 
 function addTask($conn, $template_id, $task_name, $task_desc, $activity)
@@ -255,6 +267,12 @@ function addBoardTask($conn, $board_id, $task_name, $task_desc, $activity)
     $sql = "INSERT INTO board_task (Title, Description, Lane, board_id, number) VALUES ('$task_name', '$task_desc', '$activity', '$board_id', '$task_number')";
     return mysqli_query($conn, $sql);
 }
+
+function getBoardTask($conn, $board_id, $lane){
+    $sql = "SELECT * FROM board_task WHERE board_id = $board_id AND Lane = '$lane' ORDER BY number ASC";
+    return mysqli_query($conn, $sql);
+}
+
 
 function deleteTask($conn, $task_id) {
     $sql = "DELETE FROM template_task WHERE task_id = $task_id";
@@ -290,6 +308,14 @@ function getCategories($conn)
     return $result;
 }
 
+function getBoards($conn, $workspace_id)
+{
+    $sql = "SELECT * FROM board WHERE workspace_id = $workspace_id";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
+
 function getCategoryTemplates($conn, $categ_id)
 {
     $sql = "SELECT * FROM template WHERE categ_id = $categ_id";
@@ -312,6 +338,16 @@ function getTemplateTasks($conn, $template_id, $lane)
     return $result;
 }
 
+function renderBoards($result)
+{
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<a href="./board.php' . (isset($_GET['workspace_id']) ? '?workspace_id=' . $_GET['workspace_id'] : '?workspace_id=1') . '&board_id=' . $row['board_id'] . '"><div class="card">' . $row['BoardName'] . '</div></a>';
+        }
+    } else {
+        echo "No boards found.";
+    }
+}
 
 function renderCategories($result)
 {
@@ -354,6 +390,34 @@ function renderTasks($result)
                     </button>
                     <form class="delete-task-form">
                         <input type="hidden" name="task_id" value="' . $row["task_id"] . '">
+                        <button type="button" class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
+                    </form>
+                </div>
+            </div>';
+            $count++;
+        }
+    }
+}
+
+function renderBoardTasks($result)
+{
+    if (!$result) {
+        return;
+    }
+    if (mysqli_num_rows($result) > 0) {
+        $count = 0;
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<div class="task" draggable="true" data-id="' . $row["board_task_id"] . '" data-number="' . $row["number"] . '" data-activity="' . $row["Lane"] . '" data-workspace="' . (isset($_GET['workspace_id']) ? intval($_GET['workspace_id']) : 1) . '">
+            <div class="task-content">
+                    <h3 class="task-name">' . $row['Title'] . '</h3>
+                    <p class="task-description">' . $row['Description'] . '</p>
+                </div>
+                <div class="task-buttons">
+                    <button class="edit-button" onclick="openModal(' . $row['board_id'] . ',' . $row['board_task_id'] . ', \'' . $row['Title'] . '\', \'' . $row['Description'] . '\', \'' . $row['Lane'] . '\', \'' . $row['number'] . '\')">
+                        <i class="fa-solid fa-pen-to-square fa-lg" style="color: #ffffff;"></i>
+                    </button>
+                    <form class="delete-task-form">
+                        <input type="hidden" name="task_id" value="' . $row["board_task_id"] . '">
                         <button type="button" class="delete-button"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
                     </form>
                 </div>

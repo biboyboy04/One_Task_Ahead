@@ -10,9 +10,9 @@
                 </a> -->
                 <!-- a href="?page=request-management" -->
                 <?php
-                $categories = getCategories($conn);
-                renderCategories($categories);
-                ?>
+      $categories = getCategories($conn);
+      renderCategories($categories);
+    ?>
             </div>
         </div>
     </div>

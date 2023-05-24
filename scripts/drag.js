@@ -17,7 +17,7 @@ export const dragAndDrop = () => {
 
       const bottomTask = insertAboveTask(zone, e.clientY);
       const curTask = document.querySelector(".is-dragging");
-      console.log(curTask);
+  
 
       if (!bottomTask) {
         if (zone.id === "todo-lane") {
@@ -79,11 +79,23 @@ export const dragAndDrop = () => {
     });
 
     const taskDataJSON = JSON.stringify(taskData);
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlIdTemplate = urlParams.get('id');
+    const urlIdBoard = urlParams.get('board_id');
+    let url;
+
+    if (urlIdTemplate) {
+      url = '../php/update_task.php';
+    } else if (urlIdBoard) {
+      url = '../php/update_board_task.php';
+    }
+
 
     // Send the task data to the PHP file using AJAX
     $.ajax({
       type: 'POST',
-      url: '../php/update_task.php',
+      url: url,
       data: { task_data: taskDataJSON },
       success: function(response) {
         console.log(response);
