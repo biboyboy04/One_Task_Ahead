@@ -1,4 +1,9 @@
-<?php include('./header.php') ?>
+<?php 
+include('./header.php') ;
+// include('../php/functions.php');
+// include('../php/dbh.php');
+?>
+
 <!-- content -->
 <div class="content">
   <div class="templates-popular">
@@ -20,11 +25,14 @@
     </div>
   </div>
   <div class="workspaces-user">
-    <h2>YOUR WORKSPACES</h2>
+    <h2>YOUR BOARDS</h2>
     <div class="container">
-      <div class="card">Adamson</div>
-      <div class="card">Upwork</div>
-      <div class="card">LinkedIn</div>
+
+      <?php
+       $workspace_id = isset($_GET["workspace_id"]) ? $_GET["workspace_id"] : null;
+        $boards = getBoards($conn, $workspace_id);
+        renderBoards($boards);
+      ?>
     </div>
   </div>
 </div>

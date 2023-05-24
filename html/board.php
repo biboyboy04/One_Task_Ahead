@@ -147,7 +147,7 @@ include('../php/functions.php');
             <input id = "task_id" type="hidden" name="task_id" value="">
             <input id = "activity" type="hidden" name="activity" value="">
             <input id = "number" type="hidden" name="number" value="">
-            <input type="hidden" name="temp_id" value="<?php echo $temp_id; ?>">
+            <input type="hidden" name="temp_id" value="">
             <button id="edit-form-submit" type="submit">Edit</button>
         </form>
     </div>
@@ -161,6 +161,10 @@ include('../php/functions.php');
             $template = getTemplateTasks($conn, $temp_id, "todo");
             renderTasks($template);
           }
+          if($board_id = isset($_GET["board_id"]) ? $_GET["board_id"] : null)  {
+            $board = getBoardTask($conn, $board_id, "todo");
+            renderBoardTasks($board);
+          }
 
         ?>
         <button id="todo-submit" type="submit">Add +</button>
@@ -173,6 +177,10 @@ include('../php/functions.php');
           $template = getTemplateTasks($conn, $temp_id, "doing");
           renderTasks($template);
          }
+         if($board_id = isset($_GET["board_id"]) ? $_GET["board_id"] : null)  {
+          $board = getBoardTask($conn, $board_id, "doing");
+          renderBoardTasks($board);
+        }
 
         ?>
       </div>
@@ -183,6 +191,10 @@ include('../php/functions.php');
             if($temp_id){
             $template = getTemplateTasks($conn, $temp_id, "done");
             renderTasks($template);
+            }
+            if($board_id = isset($_GET["board_id"]) ? $_GET["board_id"] : null)  {
+              $board = getBoardTask($conn, $board_id, "done");
+              renderBoardTasks($board);
             }
         ?>
       </div>
@@ -292,8 +304,18 @@ $(document).ready(function() {
     const description = $('#edit-description-input').val();
     const activity = $('#activity').val();
     const number = $('#number').val();
+
     const urlParams = new URLSearchParams(window.location.search);
     const workspaceId = urlParams.get('workspace_id') || 1;
+    const urlIdTemplate = urlParams.get('id');
+    const urlIdBoard = urlParams.get('board_id');
+    let url;
+
+    if (urlIdTemplate) {
+      url = '../php/edit_task.php';
+    } else if (urlIdBoard) {
+      url = '../php/edit_board_task.php';
+    }
 
     // Create an object with the form data
     const formData = {
@@ -308,7 +330,7 @@ $(document).ready(function() {
     // Send the form data to the PHP file using AJAX
     $.ajax({
       type: 'POST',
-      url: '../php/edit_task.php',
+      url: url,
       data: formData,
       success: function(response) {
         // Handle the response from the PHP file if needed
@@ -351,10 +373,22 @@ $(document).on('click', '.delete-button', function(event) {
     // Get the task ID from the hidden input field
     const taskId = $(this).siblings('input[name="task_id"]').val();
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const workspaceId = urlParams.get('workspace_id') || 1;
+    const urlIdTemplate = urlParams.get('id');
+    const urlIdBoard = urlParams.get('board_id');
+    let url;
+
+    if (urlIdTemplate) {
+      url = '../php/delete_task.php';
+    } else if (urlIdBoard) {
+      url = '../php/delete_board_task.php';
+    }
+
     // Send the AJAX request
     $.ajax({
       type: 'POST',
-      url: '../php/delete_task.php',
+      url: url,
       data: { task_id: taskId },
       success: function(response) {
         // Handle the response from the PHP file if needed
